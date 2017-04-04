@@ -1,2 +1,3 @@
----
-message: "This node is using common data"
+version: 5
+
+filebucketserver: "puppet.curric.gihs.sa.edu.au"
