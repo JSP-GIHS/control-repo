@@ -10,6 +10,7 @@ mod "puppetlabs/stdlib",       :latest
 mod "puppetlabs/puppetdb",     :latest
 mod "puppetlabs/hocon",        :latest
 mod "puppetlabs/firewall",     :latest
+mod "puppetlabs/postgresql",   :latest
 
 # Modules from Git
 # Examples: https://github.com/puppetlabs/r10k/blob/master/doc/puppetfile.mkd#examples
