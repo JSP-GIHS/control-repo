@@ -25,3 +25,14 @@ mod "choria-mcollective_util_actionpolicy",  :latest
 mod "choria-nats",                           :latest
 mod "camptocamp-systemd",                    :latest
 
+#
+# Jenkins
+#
+mod "rtyler-jenkins",                        :latest
+mod "puppetlabs-java",                       :latest
+mod "puppet-archive",                        :latest
+mod "darin-zypprepo",                        :latest
+
+mod "maestrodev-rvm",                        :latest
+mod "golja-gnupg",                           :latest
+
