@@ -17,6 +17,7 @@ node 'puppet01.curric.gihs.sa.edu.au' {
   }
   include nats
   include mcollective
+  include role::jenkins
 }
 
 node 'puppet02.curric.gihs.sa.edu.au' {
