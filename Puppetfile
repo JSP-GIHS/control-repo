@@ -33,6 +33,6 @@ mod "puppetlabs-java",                       :latest
 mod "puppet-archive",                        :latest
 mod "darin-zypprepo",                        :latest
 
-mod "maestrodev-rvm",                        :latest
+mod "jdowning-rbenv",                        :latest
 mod "golja-gnupg",                           :latest
 
