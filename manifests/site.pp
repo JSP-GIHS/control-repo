@@ -18,6 +18,10 @@ node 'puppet01.curric.gihs.sa.edu.au' {
   include nats
   include mcollective
   include role::jenkins
+  class { 'r10k':
+    remote => 'https://github.com/JSP-GIHS/control-repo.git',
+  }
+  include r10k::mcollective
 }
 
 node 'puppet02.curric.gihs.sa.edu.au' {
