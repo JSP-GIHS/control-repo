@@ -1,0 +1,4 @@
+---
+
+mcollective::client: true
+
