@@ -2,3 +2,10 @@
 
 mcollective::client: true
 
+mcollective::site_policies:
+  - action: "allow"
+    callers: "choria=jenkins.mcollective"
+    actions: "*"
+    facts: "*"
+    classes: "*"
+
