@@ -36,3 +36,15 @@ mod "darin-zypprepo",                        :latest
 mod "jdowning-rbenv",                        :latest
 mod "golja-gnupg",                           :latest
 
+#
+# r10k
+#
+mod "puppet-r10k",                           :latest
+mod "gentoo-portage",                        :latest
+mod "puppet-make",                           :latest
+mod "puppetlabs-gcc",                        :latest
+mod "puppetlabs-git",                        :latest
+mod "puppetlabs-ruby",                       :latest
+mod "puppetlabs-vcsrepo",                    :latest
+#mod "puppetlabs-inifile",                    :latest
+#mod "puppetlabs-stdlib",                     :latest
