@@ -1,6 +1,6 @@
 filebucket { 'main':
   path   => false,
-  server => lookup("filebucketserver"),
+  server => lookup('filebucketserver'),
 }
 
 File {
