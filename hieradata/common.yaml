@@ -52,3 +52,31 @@ profile::jenkins::plugins:
   - workflow-scm-step
   - workflow-step-api
   - workflow-support
+  # Pretty it up - blueocean
+  - e-editor
+  - blueocean
+  - blueocean-autofavorite
+  - blueocean-commons
+  - blueocean-config
+  - blueocean-dashboard
+  - blueocean-display-url
+  - blueocean-events
+  - blueocean-git-pipeline
+  - blueocean-github-pipeline
+  - blueocean-i18n
+  - blueocean-jwt
+  - blueocean-personalization
+  - blueocean-pipeline-api-impl
+  - blueocean-pipeline-editor
+  - blueocean-rest
+  - blueocean-rest-impl
+  - blueocean-web
+  - favorite
+  - github
+  - github-api
+  - github-branch-source
+  - jackson2-api
+  - pubsub-light
+  - sse-gateway
+  - token-macro
+  - variant
