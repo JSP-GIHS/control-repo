@@ -9,7 +9,7 @@ pipeline {
     }
     stage('Puppet Lint Validation') {
       steps {
-	sh '/usr/bin/find . -path ./modules -prune -o -name "*.pp" -exec /usr/bin/puppet-lint --fail-on-warnings --with-filename {} \\;'
+	sh '/usr/bin/find . -path ./modules -prune -o -name "*.pp" | grep -v "./modules" | xargs /usr/bin/puppet-lint --fail-on-warnings --with-filename {} \\;'
       }
     }
   }
