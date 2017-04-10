@@ -9,7 +9,7 @@ pipeline {
     }
     stage('Puppet Lint Validation') {
       steps {
-	sh 'echo $(find . -type f -name "*.pp" \\( -exec /usr/bin/puppet-lint --with-filename {} \\; -o -quit \\) 2>&1 ) | grep -v RANDOM'
+	sh 'echo $(find . -type f -name "*.pp" \\( -exec /usr/bin/puppet-lint --fail-on-warnings --with-filename {} \\; -o -quit \\) 2>&1 ) | grep -v RANDOM'
       }
     }
   }
