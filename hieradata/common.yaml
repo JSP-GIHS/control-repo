@@ -53,7 +53,16 @@ profile::jenkins::plugins:
   - workflow-step-api
   - workflow-support
   # Pretty it up - blueocean
-  - e-editor
+  - favorite
+  - github
+  - github-api
+  - github-branch-source
+  - jackson2-api
+  - metrics
+  - pubsub-light
+  - sse-gateway
+  - token-macro
+  - variant
   - blueocean
   - blueocean-autofavorite
   - blueocean-commons
@@ -71,12 +80,3 @@ profile::jenkins::plugins:
   - blueocean-rest
   - blueocean-rest-impl
   - blueocean-web
-  - favorite
-  - github
-  - github-api
-  - github-branch-source
-  - jackson2-api
-  - pubsub-light
-  - sse-gateway
-  - token-macro
-  - variant
