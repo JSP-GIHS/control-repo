@@ -12,7 +12,7 @@ pipeline {
 	sh '/usr/bin/find . -path ./modules -prune -o -name "*.pp" | grep -v "./modules" | xargs /usr/bin/puppet-lint --fail-on-warnings'
       }
     }
-    stage('r10k Deployment - Production') {
+    stage('r10k Deployment Production') {
       steps {
         sh '/opt/puppetlabs/puppet/bin/mco rpc r10k deploy environment=production'
       }
