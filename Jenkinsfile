@@ -10,7 +10,7 @@ pipeline {
   }
   post {
     success {
-      sh '/opt/puppetlabs/puppet/bin/mco r10k deploy environment -p'
+      sh '/opt/puppetlabs/puppet/bin/mco rpc r10k deploy environment=production'
     }
   }
 }
