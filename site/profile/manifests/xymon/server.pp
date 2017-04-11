@@ -1,5 +1,8 @@
-# Configure the Xymon Server to use the default CGI URL's on an Ubuntu Xenial installation.
-# This requires Nginx as we run this for our web environment over the default apache.
+# Configure the Xymon Server to use the default CGI
+# URL's on an Ubuntu Xenial installation.
+#
+# This requires Nginx as we run this for our web
+# environment over the default apache.
 class profile::xymon::server {
 
   package { ['xymon']:
@@ -37,7 +40,7 @@ class profile::xymon::server {
 
   file { '/etc/nginx/sites-available/xymon':
     ensure  => present,
-    source  => 'puppet:///files/xymon-web.cfg',
+    source  => 'puppet:///files/modules/xymon/xymon-web.cfg',
     require => Package['nginx-core'],
   }
 
