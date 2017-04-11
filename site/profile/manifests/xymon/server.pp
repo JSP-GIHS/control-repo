@@ -1,6 +1,6 @@
 # Configure the Xymon Server to use the default CGI URL's on an Ubuntu Xenial installation.
 # This requires Nginx as we run this for our web environment over the default apache.
-class role::xymon::server {
+class profile::xymon::server {
 
   package { ['xymon']:
     ensure  => present,

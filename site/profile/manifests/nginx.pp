@@ -1,5 +1,5 @@
-# Install Nginx and FCGI. This is not called role::web or similar because we deploy a myriad of webservers here.
-class role::nginx {
+# Install Nginx and FCGI. This is not called profile::web or similar because we deploy a myriad of webservers here.
+class profile::nginx {
   package { ['nginx-core', 'fcgiwrap', 'spawn-fcgi']:
     ensure => present,
   }
