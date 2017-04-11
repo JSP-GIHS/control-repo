@@ -18,6 +18,7 @@ node 'puppet01.curric.gihs.sa.edu.au' {
   include nats
   include mcollective
   include role::jenkins
+  include role::xymon
   class { 'r10k':
     remote => 'https://github.com/JSP-GIHS/control-repo.git',
   }
