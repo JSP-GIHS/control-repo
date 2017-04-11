@@ -22,6 +22,9 @@ node 'puppet01.curric.gihs.sa.edu.au' {
     remote => 'https://github.com/JSP-GIHS/control-repo.git',
   }
   include r10k::mcollective
+  package { ['nginx-core', 'fcgiwrap', 'spawn-fcgi']:
+    ensure => present,
+  }
 }
 
 node 'puppet02.curric.gihs.sa.edu.au' {
