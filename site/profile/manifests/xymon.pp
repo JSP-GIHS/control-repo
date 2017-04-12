@@ -2,4 +2,5 @@
 # that we can later do a Xymon::Client profile
 class profile::xymon {
   include profile::xymon::server
+  include profile::xymon::client
 }
