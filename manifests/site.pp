@@ -8,27 +8,16 @@ File {
 }
 
 node 'default' {
-  include mcollective
+  include profile::base
 }
 
 node 'puppet01.curric.gihs.sa.edu.au' {
-  class { 'puppetdb::master::config':
-    puppetdb_server => 'puppet02.curric.gihs.sa.edu.au',
-  }
-  include nats
-  include mcollective
+  include role::puppetmaster
   include role::jenkins
   include role::xymon
-  class { 'r10k':
-    remote => 'https://github.com/JSP-GIHS/control-repo.git',
-  }
-  include r10k::mcollective
 }
 
 node 'puppet02.curric.gihs.sa.edu.au' {
-  class { 'puppetdb':
-    listen_address => '0.0.0.0',
-  }
-  include mcollective
+  include role::puppetdb
 }
 

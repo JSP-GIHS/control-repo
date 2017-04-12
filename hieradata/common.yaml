@@ -85,4 +85,6 @@ r10k:
   remote: "https://github.com/JSP-GIHS/control-repo.git"
 
 puppet:
-  puppetdbserver: "puppet02.curric.gihs.sa.edu.au"
+  puppetdb:
+    server: "puppet02.curric.gihs.sa.edu.au"
+    listenip: "0.0.0.0"
