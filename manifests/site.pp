@@ -19,5 +19,6 @@ node 'puppet01.curric.gihs.sa.edu.au' {
 
 node 'puppet02.curric.gihs.sa.edu.au' {
   include role::puppetdb
+  include profile::xymon::client
 }
 
