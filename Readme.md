@@ -30,7 +30,7 @@ sudo sh -c "openssl passwd -apr1 >> /etc/nginx/.htpasswd"
 
 The secure CGI location will need to be configured under /etc/nginx/sites-available/xymon. It is recommended to only secure the CGI secure area, in which case an additional location block will need to be added *above* the .sh location block
 
-###auth_basic (not recommended)
+### auth_basic (not recommended)
 ```
 location ~ ^/cgi-secure/.*\.sh$ {
   gzip off;
