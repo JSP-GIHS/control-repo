@@ -15,8 +15,8 @@ class profile::xymon::client {
   file_line { 'xymonclient_server':
     ensure  => present,
     path    => '/etc/default/xymon-client',
-    line    => "XYMONSERVERS=${xymonserver}",
-    match   => 'XYMONSERVERS=',
+    line    => "XYMONSERVERS=\"${xymonserver}\"",
+    match   => '^XYMONSERVERS=',
     require => Package['xymon-client'],
     notify  => Service['xymon-client'],
   }
