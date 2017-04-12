@@ -81,10 +81,7 @@ profile::jenkins::plugins:
   - blueocean-rest-impl
   - blueocean-web
 
-r10k:
-  remote: "https://github.com/JSP-GIHS/control-repo.git"
+r10k::remote: "https://github.com/JSP-GIHS/control-repo.git"
 
-puppet:
-  puppetdb:
-    server: "puppet02.curric.gihs.sa.edu.au"
-    listenip: "0.0.0.0"
+puppet::puppetdb::server: "puppet02.curric.gihs.sa.edu.au"
+puppet::puppetdb::listenip: "0.0.0.0"
