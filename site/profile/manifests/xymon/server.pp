@@ -20,20 +20,27 @@ class profile::xymon::server {
     require => Package['xymon'],
   }
 
-  file_line { 'xymonserver_cgiurl':
-    ensure  => present,
-    path    => '/etc/xymon/xymonserver.cfg',
-    line    => 'XYMONSERVERCGIURL="/cgi-bin"',
-    match   => 'XYMONSERVERCGIURL=',
-    require => Package['xymon'],
-    notify  => Service['xymon'],
-  }
+  #file_line { 'xymonserver_cgiurl':
+  #  ensure  => present,
+  #  path    => '/etc/xymon/xymonserver.cfg',
+  #  line    => 'XYMONSERVERCGIURL="/cgi-bin"',
+  #  match   => 'XYMONSERVERCGIURL=',
+  #  require => Package['xymon'],
+  #  notify  => Service['xymon'],
+  #}
 
-  file_line { 'xymonserver_securecgiurl':
+  #file_line { 'xymonserver_securecgiurl':
+  #  ensure  => present,
+  #  path    => '/etc/xymon/xymonserver.cfg',
+  #  line    => 'XYMONSERVERSECURECGIURL="/cgi-secure"',
+  #  match   => 'XYMONSERVERSECURECGIURL=',
+  #  require => Package['xymon'],
+  #  notify  => Service['xymon'],
+  #}
+
+  file { '/etc/xymon/hosts.cfg':
     ensure  => present,
-    path    => '/etc/xymon/xymonserver.cfg',
-    line    => 'XYMONSERVERSECURECGIURL="/cgi-secure"',
-    match   => 'XYMONSERVERSECURECGIURL=',
+    source  => 'puppet:///files/modules/xymon/hosts.cfg',
     require => Package['xymon'],
     notify  => Service['xymon'],
   }
