@@ -80,3 +80,9 @@ profile::jenkins::plugins:
   - blueocean-rest
   - blueocean-rest-impl
   - blueocean-web
+
+r10k:
+  remote: "https://github.com/JSP-GIHS/control-repo.git"
+
+puppet:
+  puppetdbserver: "puppet02.curric.gihs.sa.edu.au"
