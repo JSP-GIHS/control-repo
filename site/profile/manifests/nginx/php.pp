@@ -18,6 +18,7 @@ class profile::nginx::php {
 
   service { 'php7.0-fpm':
     ensure  => running,
+    enable  => true,
     require => Package['php7.0-fpm'],
   }
 
