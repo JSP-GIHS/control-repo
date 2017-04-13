@@ -4,7 +4,7 @@
 # day
 class profile::nginx {
   package { ['nginx-core', 'fcgiwrap', 'spawn-fcgi']:
-    ensure => present,
+    ensure => 'latest',
   }
 
   service { 'nginx':

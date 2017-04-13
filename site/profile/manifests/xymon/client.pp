@@ -1,7 +1,7 @@
 # Xymon Client configuration
 class profile::xymon::client {
   package { ['xymon-client']:
-    ensure => present,
+    ensure => 'latest',
   }
 
   service { ['xymon-client']:

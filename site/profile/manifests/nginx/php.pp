@@ -7,7 +7,7 @@
 # apache may be different (but I do not know at this time)
 class profile::nginx::php {
   package { ['php7.0-fpm']:
-    ensure  => present,
+    ensure  => 'latest',
     require => Package['nginx-core'],
   }
 

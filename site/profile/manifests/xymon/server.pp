@@ -6,7 +6,7 @@
 class profile::xymon::server {
 
   package { ['xymon']:
-    ensure  => present,
+    ensure  => 'latest',
     require => [
       Package['nginx-core'],
       Package['fcgiwrap'],
