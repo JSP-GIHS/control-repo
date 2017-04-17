@@ -2,6 +2,13 @@ version: 5
 
 filebucketserver: "puppet.curric.gihs.sa.edu.au"
 
+mcollective::site_policies:
+  - action: "allow"
+    callers: "puppet=jenkins.mcollective"
+    actions: "last_run_summary,runonce,status"
+    facts: "*"
+    classes: "*"
+
 profile::jenkins::plugins:
   # If you turn on Pipeline and Git Plugin, you end with this list
   - ace-editor
