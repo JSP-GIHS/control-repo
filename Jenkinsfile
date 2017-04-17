@@ -17,5 +17,10 @@ pipeline {
         sh '/opt/puppetlabs/puppet/bin/mco rpc r10k deploy environment=production'
       }
     }
+    stage('mco Puppet Runonce') {
+      steps {
+        sh '/opt/puppetlabs/puppet/bin/mco puppet runall 5'
+      }
+    }
   }
 }
