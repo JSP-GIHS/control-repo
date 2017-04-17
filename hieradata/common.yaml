@@ -5,7 +5,7 @@ filebucketserver: "puppet.curric.gihs.sa.edu.au"
 mcollective::site_policies:
   - action: "allow"
     callers: "puppet=jenkins.mcollective"
-    actions: "last_run_summary,runonce,status"
+    actions: "last_run_summary,runonce,runall,status"
     facts: "*"
     classes: "*"
 
