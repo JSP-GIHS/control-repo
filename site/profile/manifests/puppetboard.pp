@@ -33,22 +33,22 @@ class profile::puppetboard {
 
   $nginx_site_template = @(END)
 upstream puppetboard {
-	server		127.0.0.1:9090;
+  server    127.0.0.1:9090;
 }
 
 server {
-	listen		80;
-	server_name	$fqdn;
-	charset		utf-8;
+  listen       80;
+  server_name  $::fqdn;
+  charset      utf-8;
 
-	location /static {
-		alias	$basedir/puppetboard/puppetboard/static;
-	}
+  location /static {
+    alias $basedir/puppetboard/puppetboard/static;
+  }
 
-	location / {
-		uwsgi_pass	puppetboard;
-		include		/etc/nginx/uwsgi_params;
-	}
+  location / {
+    uwsgi_pass puppetboard;
+    include    /etc/nginx/uwsgi_params;
+  }
 }
   END
 
