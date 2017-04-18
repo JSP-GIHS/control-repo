@@ -8,4 +8,5 @@ class role::puppetdb {
 
   include profile::nginx
   include profile::puppetboard
+  include profile::puppetboard::nginx
 }
