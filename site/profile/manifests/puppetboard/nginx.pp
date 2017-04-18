@@ -43,5 +43,6 @@ server {
       Package['nginx-core'],
       File['/etc/nginx/sites-available/puppetboard'],
     ],
+    notify  => Service['nginx'],
   }
 }
