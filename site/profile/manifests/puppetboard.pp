@@ -31,6 +31,8 @@ class profile::puppetboard {
     ],
   }
 
+  #
+  # Nginx Site Template
   $nginx_site_template = @(END)
 upstream puppetboard {
   server    127.0.0.1:9090;
@@ -56,5 +58,37 @@ server {
     ensure  => 'file',
     content => inline_template( $nginx_site_template ),
     require => Package['nginx-core'],
+  }
+
+  case $::operatingsystem {
+    'Ubuntu': {
+      if versioncmp($::operatingsystemmajrelease, '16.04') >= 0 {
+        #
+        # Systemd service template
+        # Note that puppetboard_settings is not created or controlled
+        # by this profile as it's not necessary for a profile
+        # intended to be on the same server as puppetdb
+        $systemd_service_template = @(END)
+[Unit]
+Description=uWSGI Instance of Puppetboard
+After=network.target
+
+[Service]
+User=<%= @user %>
+Group=<%= @group %>
+WorkingDirectory=<%= @docroot %>
+Environment="PUPPETBOARD_SETTINGS=/var/www/puppetboard/settings.py"
+ExecStart=/usr/local/bin/uwsgi --socket 127.0.0.1:9090 --wsgi-file wsgi.py
+
+[Install]
+WantedBy=multi-user.target
+END
+
+        file { '/etc/systemd/system/puppetboarduwsgi.service':
+          ensure  => 'file',
+          content => inline_template( $systemd_service_template ),
+	}
+      }
+    }
   }
 }
