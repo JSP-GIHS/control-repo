@@ -84,27 +84,29 @@ ExecStart=/usr/local/bin/uwsgi --socket '127.0.0.1:9090' --wsgi-file wsgi.py
 WantedBy=multi-user.target
 END
 
-        file { '/etc/systemd/system/puppetboarduwsgi.service':
+        $pbservice = 'puppetboarduwsgi.service'
+
+        file { "/etc/systemd/system/$pbservice":
           ensure  => 'file',
           content => inline_template( $systemd_service_template ),
         }
 
-	file { '/etc/systemd/system/multi-user.target.wants':
-	  ensure  => 'link',
-	  source  => '/etc/systemd/system/puppetboarduwsgi.service',
-	  require => [
-	    File['/etc/systemd/system/puppetboarduwsgi.service'],
-	  ],
-	}
+        file { "/etc/systemd/system/multi-user.target.wants/$pbservice":
+          ensure  => 'link',
+          source  => "/etc/systemd/system/$pbservice",
+          require => [
+            File["/etc/systemd/system/$pbservice"],
+          ],
+        }
 
-	exec { 'systemctl-reloaddaemon-puppetboarduwsgi':
-	  command => '/bin/systemctl daemon-reload',
-	  require => File['/etc/systemd/system/puppetboarduwsgi.service'],
-	  subscribe => [
-            File['/etc/systemd/system/puppetboarduwsgi.service'],
-	  ],
-	  refreshonly => true,
-	}
+        exec { 'systemctl-reloaddaemon-puppetboarduwsgi':
+          command => '/bin/systemctl daemon-reload',
+          require => File["/etc/systemd/system/$pbservice"],
+          subscribe => [
+            File["/etc/systemd/system/$pbservice"],
+          ],
+          refreshonly => true,
+        }
       }
     }
     default: {
