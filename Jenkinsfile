@@ -14,7 +14,7 @@ pipeline {
     }
     stage('r10k Deployment Production') {
       steps {
-        sh '/opt/puppetlabs/puppet/bin/mco rpc r10k deploy environment=production'
+        sh "/opt/puppetlabs/puppet/bin/mco rpc r10k deploy environment=${env.BRANCH_NAME}"
       }
     }
     stage('mco Puppet Runonce') {
