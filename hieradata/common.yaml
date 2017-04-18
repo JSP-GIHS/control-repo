@@ -2,10 +2,11 @@ version: 5
 
 filebucketserver: "puppet.curric.gihs.sa.edu.au"
 
-mcollective::site_policies:
+# No disable
+mcollective_agent_puppet::policies:
   - action: "allow"
-    callers: "puppet=jenkins.mcollective"
-    actions: "last_run_summary,runonce,runall,status"
+    callers: "choria=jenkins.mcollective"
+    actions: "count enable runall runonce status summary"
     facts: "*"
     classes: "*"
 
