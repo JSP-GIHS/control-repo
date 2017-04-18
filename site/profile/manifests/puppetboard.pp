@@ -88,6 +88,23 @@ END
           ensure  => 'file',
           content => inline_template( $systemd_service_template ),
         }
+
+	file { '/etc/systemd/system/multi-user.target.wants':
+	  ensure  => 'link',
+	  source  => '/etc/systemd/system/puppetboarduwsgi.service',
+	  require => [
+	    File['/etc/systemd/system/puppetboarduwsgi.service'],
+	  ],
+	}
+
+	exec { 'systemctl-reloaddaemon-puppetboarduwsgi':
+	  command => '/bin/systemctl daemon-reload',
+	  require => File['/etc/systemd/system/puppetboarduwsgi.service'],
+	  subscribe => [
+            File['/etc/systemd/system/puppetboarduwsgi.service'],
+	  ],
+	  refreshonly => true,
+	}
       }
     }
     default: {
