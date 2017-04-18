@@ -90,7 +90,8 @@ END
         }
       }
     },
-    'default': {
+    default: {
+      $doingnothing = true
     }
   }
 }
