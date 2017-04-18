@@ -48,3 +48,12 @@ mod "puppetlabs-ruby",                       :latest
 mod "puppetlabs-vcsrepo",                    :latest
 #mod "puppetlabs-inifile",                    :latest
 #mod "puppetlabs-stdlib",                     :latest
+
+#
+# Puppetboard
+#
+mod "puppet-puppetboard",                    :latest
+#mod "puppetlabs-stdlib",                     :latest
+#mod "puppetlabs-vcsrepo",                    :latest
+mod "stankevich-python",                     :latest
+mod "stahnma-epel",                          :latest

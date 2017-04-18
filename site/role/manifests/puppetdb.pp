@@ -5,4 +5,7 @@ class role::puppetdb {
   class { 'puppetdb':
     listen_address => lookup('puppet::puppetdb::listenip'),
   }
+
+  include profile::nginx
+  include profile::puppetboard
 }
