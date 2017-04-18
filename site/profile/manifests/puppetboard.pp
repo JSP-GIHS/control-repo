@@ -86,24 +86,24 @@ END
 
         $pbservice = 'puppetboarduwsgi.service'
 
-        file { "/etc/systemd/system/$pbservice":
+        file { "/etc/systemd/system/${pbservice}":
           ensure  => 'file',
           content => inline_template( $systemd_service_template ),
         }
 
-        file { "/etc/systemd/system/multi-user.target.wants/$pbservice":
+        file { "/etc/systemd/system/multi-user.target.wants/${pbservice}":
           ensure  => 'link',
-          source  => "/etc/systemd/system/$pbservice",
+          source  => "/etc/systemd/system/${pbservice}",
           require => [
-            File["/etc/systemd/system/$pbservice"],
+            File["/etc/systemd/system/${pbservice}"],
           ],
         }
 
         exec { 'systemctl-reloaddaemon-puppetboarduwsgi':
-          command => '/bin/systemctl daemon-reload',
-          require => File["/etc/systemd/system/$pbservice"],
-          subscribe => [
-            File["/etc/systemd/system/$pbservice"],
+          command     => '/bin/systemctl daemon-reload',
+          require     => File["/etc/systemd/system/${pbservice}"],
+          subscribe   => [
+            File["/etc/systemd/system/${pbservice}"],
           ],
           refreshonly => true,
         }
