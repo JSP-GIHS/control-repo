@@ -89,7 +89,7 @@ END
           content => inline_template( $systemd_service_template ),
         }
       }
-    },
+    }
     default: {
       $doingnothing = true
     }
