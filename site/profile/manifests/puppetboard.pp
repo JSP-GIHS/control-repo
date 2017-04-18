@@ -77,8 +77,8 @@ After=network.target
 User=<%= @user %>
 Group=<%= @group %>
 WorkingDirectory=<%= @docroot %>
-Environment="PUPPETBOARD_SETTINGS=/var/www/puppetboard/settings.py"
-ExecStart=/usr/local/bin/uwsgi --socket 127.0.0.1:9090 --wsgi-file wsgi.py
+Environment='PUPPETBOARD_SETTINGS=/var/www/puppetboard/settings.py'
+ExecStart=/usr/local/bin/uwsgi --socket '127.0.0.1:9090' --wsgi-file wsgi.py
 
 [Install]
 WantedBy=multi-user.target
@@ -87,8 +87,10 @@ END
         file { '/etc/systemd/system/puppetboarduwsgi.service':
           ensure  => 'file',
           content => inline_template( $systemd_service_template ),
-	}
+        }
       }
+    },
+    'default': {
     }
   }
 }
