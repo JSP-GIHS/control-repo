@@ -1,9 +1,9 @@
 # Puppetboard Setup for Nginx. Taken from github issue 143:
 # https://github.com/voxpupuli/puppet-puppetboard/issues/143
 class profile::puppetboard {
-  $user        = 'puppetboard',
-  $group       = 'puppetboard',
-  $basedir     = '/opt/voxpupuli',
+  $user        = 'puppetboard'
+  $group       = 'puppetboard'
+  $basedir     = '/opt/voxpupuli'
   $docroot     = "${basedir}/puppetboard"
   $wsgi_script = "${docroot}/wsgi.py"
 
@@ -15,7 +15,7 @@ class profile::puppetboard {
   class { 'puppetboard':
     user              => $user,
     group             => $group,
-    $basedir          => $basedir,
+    basedir           => $basedir,
     manage_virtualenv => true,
     reports_count     => 100,
   }
