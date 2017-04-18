@@ -107,6 +107,16 @@ END
           ],
           refreshonly => true,
         }
+
+        service { 'puppetboarduwsgi':
+          ensure    => 'running',
+          require   => [
+            File["/etc/systemd/system/multi-user.target.wants/${pbservice}"],
+          ],
+          subscribe => [
+            File["/lib/systemd/system/${pbservice}"],
+          ],
+        }
       }
     }
     default: {
