@@ -38,11 +38,11 @@ upstream puppetboard {
 
 server {
   listen       80;
-  server_name  $::fqdn;
+  server_name  <%= @fqdn %>
   charset      utf-8;
 
   location /static {
-    alias $basedir/puppetboard/puppetboard/static;
+    alias <%= @basedir %>/puppetboard/puppetboard/static;
   }
 
   location / {
