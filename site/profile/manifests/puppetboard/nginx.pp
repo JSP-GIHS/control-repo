@@ -41,7 +41,7 @@ server {
     target  => '/etc/nginx/sites-available/puppetboard',
     require => [
       Package['nginx-core'],
-      File['/etc/nginx/sites-enabled/puppetboard'],
+      File['/etc/nginx/sites-available/puppetboard'],
     ],
   }
 }
