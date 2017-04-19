@@ -3,6 +3,11 @@
 class profile::jenkins (
   Optional[Array] $plugins = undef,
 ) {
+
+  package { ['puppet-lint']:
+    ensure => 'latest',
+  }
+
   include ::jenkins
 
   if $plugins {
