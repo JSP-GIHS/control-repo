@@ -11,7 +11,7 @@ class profile::jenkins (
   package { 'puppet-lint':
     ensure   => 'latest',
     provider => 'gem',
-    require  => Package['rubygems'],
+    require  => Package['ruby'],
   }
 
   include ::jenkins
