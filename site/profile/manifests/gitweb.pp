@@ -1,12 +1,8 @@
 # Install and configure gitweb with repositories in the /srv/git
 # location
 class profile::gitweb {
-  package { ['git', 'gitweb', 'libcgi-fast-perl']:
+  package { ['git', 'gitweb']:
     ensure  => 'latest',
-    require => [
-      Package['nginx-core'],
-      Package['fcgiwrap'],
-    ],
   }
 
   file { ['/srv', '/srv/git']:
