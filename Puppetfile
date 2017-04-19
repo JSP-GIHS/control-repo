@@ -57,3 +57,8 @@ mod "puppet-puppetboard",                    :latest
 #mod "puppetlabs-vcsrepo",                    :latest
 mod "stankevich-python",                     :latest
 mod "stahnma-epel",                          :latest
+
+#
+# NTP
+#
+mod "puppetlabs-ntp",                        :latest

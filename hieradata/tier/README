@@ -1,3 +1,0 @@
-The tier folder is for generic application tiers - e.g. all HTTP servers site wide.
-
-This can be overridden closer to the node.

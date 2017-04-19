@@ -10,6 +10,10 @@ mcollective_agent_puppet::policies:
     facts: "*"
     classes: "*"
 
+ntp::servers:
+  - time01.curric.gihs.sa.edu.au iburst
+  - time02.curric.gihs.sa.edu.au iburst
+
 profile::jenkins::plugins:
   # If you turn on Pipeline and Git Plugin, you end with this list
   - ace-editor
@@ -89,9 +93,9 @@ profile::jenkins::plugins:
   - blueocean-rest-impl
   - blueocean-web
 
-r10k::remote: "https://github.com/JSP-GIHS/control-repo.git"
-
 puppet::puppetdb::server: "puppet02.curric.gihs.sa.edu.au"
 puppet::puppetdb::listenip: "0.0.0.0"
+
+r10k::remote: "https://github.com/JSP-GIHS/control-repo.git"
 
 xymon::server::ip: "192.168.10.10"

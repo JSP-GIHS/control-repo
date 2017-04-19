@@ -1,0 +1,5 @@
+ntp::servers:
+  - 0.au.pool.ntp.org iburst
+  - 1.au.pool.ntp.org iburst
+  - 2.au.pool.ntp.org iburst
+  - 3.au.pool.ntp.org iburst
