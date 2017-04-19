@@ -4,7 +4,7 @@ class profile::jenkins (
   Optional[Array] $plugins = undef,
 ) {
 
-  package { 'rubygems':
+  package { 'ruby':
     ensure => 'latest',
   }
 
