@@ -6,5 +6,6 @@ class role::jenkins {
   # this role to.
   include profile::base
   include profile::jenkins
+  include r10k::mcollective
 }
 
