@@ -1,8 +1,9 @@
 # Install and configure gitweb with repositories in the /srv/git
 # location
 class profile::gitweb {
-  package { ['git', 'gitweb']:
+  package { ['gitweb']:
     ensure  => 'latest',
+    require => Package['git'],
   }
 
   file { ['/srv', '/srv/git']:
