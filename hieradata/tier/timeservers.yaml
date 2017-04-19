@@ -1,3 +1,6 @@
+ntp::restrict:
+  -
+
 ntp::servers:
   - 0.au.pool.ntp.org iburst
   - 1.au.pool.ntp.org iburst
