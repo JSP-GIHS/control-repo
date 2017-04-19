@@ -4,8 +4,9 @@ class profile::jenkins (
   Optional[Array] $plugins = undef,
 ) {
 
-  package { ['puppet-lint']:
-    ensure => 'latest',
+  package { 'puppet-lint':
+    ensure   => 'latest',
+    provider => 'gem',
   }
 
   include ::jenkins
