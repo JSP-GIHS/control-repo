@@ -24,7 +24,7 @@ class profile::gitweb {
   file_line { '/etc/gitweb.conf_site_name':
     ensure  => 'present',
     path    => '/etc/gitweb.conf',
-    line    => "\$site_name = '${sitename}'",
+    line    => "\$site_name = '${sitename}';",
     match   => '^\$site_name =',
     require => Package['gitweb'],
   }
@@ -32,7 +32,7 @@ class profile::gitweb {
   file_line { '/etc/gitweb.conf_home_link_str':
     ensure  => 'present',
     path    => '/etc/gitweb.conf',
-    line    => "\$home_link_str = '${home_link_str}'",
+    line    => "\$home_link_str = '${home_link_str}';",
     match   => '^\$home_link_str =',
     require => Package['gitweb'],
   }
