@@ -13,6 +13,14 @@ class profile::gitweb {
   $sitename = $::fqdn
   $home_link_str = $::fqdn
 
+  file_line { '/etc/gitweb.conf_projectroot':
+    ensure  => 'present',
+    path    => '/etc/gitweb.conf',
+    line    => '$projectroot = "/srv/git";',
+    match   => '^\$projectroot =',
+    require => Package['gitweb'],
+  }
+
   file_line { '/etc/gitweb.conf_feature_pathinfo':
     ensure  => 'present',
     path    => '/etc/gitweb.conf',
