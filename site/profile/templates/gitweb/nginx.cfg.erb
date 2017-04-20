@@ -1,0 +1,49 @@
+#########
+#
+# Services for Gitweb
+#
+# This isn't as clean as Nginx allows - we assume that
+# only gitweb is in use for this hostname
+#
+#########
+server {
+	listen			80;
+	root			/usr/share/gitweb;
+	index			index.html;
+
+	server_name		<%= @hostname %>;
+
+	access_log		/var/log/nginx/gitweb-access.log;
+	error_log		/var/log/nginx/gitweb-error.log;
+
+	auth_basic		"GitWeb Secured Location"
+	auth_basic_user_file	/etc/nginx/.htpasswd.git;
+
+	location ~ ^.*\.git/objects/([0-9a-f]+/[0-9a-f]+|pack/pack-[0-9a-f]+.(pack|idx))$ {
+		root		/srv/git;
+	}
+
+	location ~ ^.*\.git/(HEAD|info/refs|objects/info/.*|git-(upload|receive)-pack)$ {
+		root		/srv/git;
+
+		fastcgi_pass	unix:/var/run/fcgiwrap.socket;
+		fastcgi_param	SCRIPT_FILENAME /usr/lib/git-core/git-http-backend;
+		fastcgi_param	PATH_INFO $uri;
+		fastcgi_param	GIT_PROJECT_ROOT /srv/git;
+		fastcgi_param	GIT_HTTP_EXPORT_ALL "";
+		fastcgi_param	REMOTE_USER $remote_user;
+
+		include		fastcgi_params;
+	}
+
+	try_files $uri @gitweb;
+
+	location @gitweb {
+		fastcgi_pass	unix:/var/run/fcgiwrap.socket;
+		fastcgi_param	SCRIPT_FILENAME /usr/share/gitweb/gitweb.cgi;
+		fastcgi_param	PATH_INFO $uri;
+		fastcgi_param	GITWEB_CONFIG /etc/gitweb.conf;
+
+		include		fastcgi_params;
+	}
+}

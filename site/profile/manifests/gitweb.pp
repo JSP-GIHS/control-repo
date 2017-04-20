@@ -1,6 +1,7 @@
 # Install and configure gitweb with repositories in the /srv/git
 # location
 class profile::gitweb {
+
   package { ['gitweb']:
     ensure  => 'latest',
     require => Package['git'],
@@ -44,4 +45,5 @@ class profile::gitweb {
     match   => '^\$home_link_str =',
     require => Package['gitweb'],
   }
+
 }

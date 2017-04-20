@@ -1,6 +1,8 @@
-# Future Proofing the Xymon::Server module by ensuring
-# that we can later do a Xymon::Client profile
+# Simple profile - include both xymon::server and
+# xymon::client
 class profile::xymon {
+
   include profile::xymon::server
   include profile::xymon::client
+
 }

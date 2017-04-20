@@ -1,5 +1,9 @@
 # Install and Configure Jenkins
+#
 # Plugin data is read from Hiera.
+#
+# Note that puppet-lint is installed here
+# as Jenkins is used to test puppet code
 class profile::jenkins (
   Optional[Array] $plugins = undef,
 ) {
@@ -21,4 +25,5 @@ class profile::jenkins (
       jenkins::plugin { $plugin: }
     }
   }
+
 }

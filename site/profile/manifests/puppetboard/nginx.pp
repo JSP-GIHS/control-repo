@@ -1,46 +1,30 @@
 # Puppetboard Setup for Nginx. Taken from github issue 143:
 # https://github.com/voxpupuli/puppet-puppetboard/issues/143
-class profile::puppetboard::nginx {
+class profile::puppetboard::nginx inherits profile::puppetboard {
   $user        = 'puppetboard'
   $group       = 'puppetboard'
   $basedir     = '/opt/voxpupuli'
   $docroot     = "${basedir}/puppetboard"
   $wsgi_script = "${docroot}/wsgi.py"
 
-  #
-  # Nginx Site Template
-  $nginx_site_template = @(END)
-upstream puppetboard {
-  server    127.0.0.1:9090;
-}
-
-server {
-  listen       80;
-  server_name  <%= @fqdn %>
-  charset      utf-8;
-
-  location /static {
-    alias <%= @basedir %>/puppetboard/puppetboard/static;
+  # Unused at this time.
+  file { '/etc/nginx/.htpasswd.puppetboard':
+    ensure  => 'present',
+    require => Service['nginx'],
   }
-
-  location / {
-    uwsgi_pass puppetboard;
-    include    /etc/nginx/uwsgi_params;
-  }
-}
-  END
 
   file { '/etc/nginx/sites-available/puppetboard':
     ensure  => 'file',
-    content => inline_template( $nginx_site_template ),
-    require => Package['nginx-core'],
+    content => template('puppetboard/nginx.cfg.erb'),
+    require => Service['nginx'],
+    notify  => Service['nginx'],
   }
 
-  file { '/etc/nginx/sites-enabled/default':
+  file { '/etc/nginx/sites-enabled/puppetboard':
     ensure  => 'symlink',
     target  => '/etc/nginx/sites-available/puppetboard',
     require => [
-      Package['nginx-core'],
+      Service['nginx'],
       File['/etc/nginx/sites-available/puppetboard'],
     ],
     notify  => Service['nginx'],

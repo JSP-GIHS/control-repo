@@ -1,6 +1,9 @@
 # Puppetboard Setup for Nginx. Taken from github issue 143:
 # https://github.com/voxpupuli/puppet-puppetboard/issues/143
+# with some modifications for Ubuntu 16.04 services which
+# are really because I haven't found a better way
 class profile::puppetboard {
+
   $user        = 'puppetboard'
   $group       = 'puppetboard'
   $basedir     = '/opt/voxpupuli'
@@ -34,32 +37,12 @@ class profile::puppetboard {
   case $::operatingsystem {
     'Ubuntu': {
       if versioncmp($::operatingsystemmajrelease, '16.04') >= 0 {
-        #
-        # Systemd service template
-        # Note that puppetboard_settings is not created or controlled
-        # by this profile as it's not necessary for a profile
-        # intended to be on the same server as puppetdb
-        $systemd_service_template = @(END)
-[Unit]
-Description=uWSGI Instance of Puppetboard
-After=network.target
-
-[Service]
-User=<%= @user %>
-Group=<%= @group %>
-WorkingDirectory=<%= @docroot %>
-Environment='PUPPETBOARD_SETTINGS=/var/www/puppetboard/settings.py'
-ExecStart=/usr/local/bin/uwsgi --socket '127.0.0.1:9090' --wsgi-file wsgi.py
-
-[Install]
-WantedBy=multi-user.target
-END
 
         $pbservice = 'puppetboarduwsgi.service'
 
         file { "/lib/systemd/system/${pbservice}":
           ensure  => 'file',
-          content => inline_template( $systemd_service_template ),
+          content => template('puppetboard/pbuwsgi.erb'),
         }
 
         file { "/etc/systemd/system/multi-user.target.wants/${pbservice}":

@@ -1,0 +1,32 @@
+#########
+#
+# Services for Puppetboard
+#
+# This isn't as clean as Nginx allows - we assume that
+# only puppetboard is in use for this hostname
+#
+#########
+upstream puppetboard {
+	server			127.0.0.1:9090;
+}
+
+server {
+	listen			80;
+	root			/var/www/html;
+	index			index.html;
+
+	server_name		<%= @hostname %>;
+	charset			utf-8;
+
+	access_log		/var/log/nginx/puppetboard-access.log;
+	error_log		/var/log/nginx/puppetboard-error.log;
+
+	location /static {
+		alias		<%= @basedir %>/puppetboard/puppetboard/static;
+	}
+
+	location / {
+		uwsgi_pass	puppetboard;
+		include		/etc/nginx/uwsgi_params;
+	}
+}

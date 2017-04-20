@@ -1,0 +1,11 @@
+# Better to create a puppetmaster fact and
+# place this in the puppetmaster tier, but
+# for the sake of keeping the repository
+# clean and being 100% functional, we will
+# put this here instead
+mcollective::site_policies:
+  - action: "allow"
+    callers: "choria=jenkins.mcollective"
+    actions: "r10k"
+    facts: "*"
+    classes: "*"

@@ -2,7 +2,6 @@ version: 5
 
 filebucketserver: "puppet.curric.gihs.sa.edu.au"
 
-# No disable
 mcollective_agent_puppet::policies:
   - action: "allow"
     callers: "choria=jenkins.mcollective"
@@ -21,4 +20,4 @@ puppet::puppetdb::listenip: "0.0.0.0"
 r10k::cachedir: "/var/cache/r10k"
 r10k::remote: "https://github.com/JSP-GIHS/control-repo.git"
 
-xymon::server::ip: "192.168.10.10"
+xymon::server::ip: "192.168.10.13"

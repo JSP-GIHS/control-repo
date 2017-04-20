@@ -1,6 +1,18 @@
 pipeline {
   agent any
 
+  //
+  // Simple Jenkinsfile for testing. Note that we assume
+  // some default paths based on Ubuntu 16.04 test servers
+  //
+  // Servers with profile::jenkins will automatically
+  // install puppet-lint via Ruby Gems
+  //
+  // Note that the Agent Run is perhaps superfluous if the
+  // environment being run is a testing environment. This
+  // is a simple file, and more creativity may be needed
+  // to sort that stage out.
+  //
   stages {
     stage('Puppet Parser Validation') {
       steps {

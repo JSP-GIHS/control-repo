@@ -3,27 +3,26 @@
 # Note that this does not light up the PHP inside Nginx, simply
 # installs the php7.0-fpm module.
 #
-# This is specified as an Nginx module as configuration of
-# apache may be different (but I do not know at this time)
-class profile::nginx::php {
+class profile::nginx::php inherits profile::nginx  {
+
   package { ['php7.0-fpm']:
     ensure  => 'latest',
-    require => Package['nginx-core'],
+    require => Service['nginx'],
   }
 
   file { '/etc/php/7.0/fpm/php.ini':
-    ensure  => present,
+    ensure  => 'present',
     require => Package['php7.0-fpm'],
   }
 
   service { 'php7.0-fpm':
-    ensure  => running,
+    ensure  => 'running',
     enable  => true,
     require => Package['php7.0-fpm'],
   }
 
   ini_setting { 'php_fpm_cgi_fix_pathinfo':
-    ensure  => present,
+    ensure  => 'present',
     path    => '/etc/php/7.0/fpm/php.ini',
     section => 'PHP',
     setting => 'cgi.fix_pathinfo',
@@ -31,4 +30,15 @@ class profile::nginx::php {
     require => Package['php7.0-fpm'],
     notify  => Service['php7.0-fpm'],
   }
+
+  ini_setting { 'php_fpm_expose_php_off':
+    ensure  => 'present',
+    path    => '/etc/php/7.0/fpm/php.ini',
+    section => 'PHP',
+    setting => 'expose_php',
+    value   => 'Off',
+    require => Package['php7.0-fpm'],
+    notify  => Service['php7.0-fpm'],
+  }
+
 }

@@ -1,4 +1,7 @@
-# Code hosting services (specifically jenkins and gitweb)
+# All codeserver systems should have their applicationtier custom
+# fact set to "codeservers" and include git for code management
+#
+# Only one applicationtier fact can be set at a time
 class profile::codeserver {
 
   package { ['git']:

@@ -6,7 +6,7 @@ defaults:
 
 hierarchy:
   - name: "Per-node data"
-    path: "nodes/%{trusted.certname}.yaml"
+    path: "node/%{trusted.certname}.yaml"
 
   - name: "Location specific application tier settings" # DR HTTP uses different MongoDB
     path: "%{location}/%{applicationtier}.yaml"
@@ -14,13 +14,13 @@ hierarchy:
   - name: "Location specific settings" # DR uses gateway X, Prod uses gateway Y
     path: "%{location}/common.yaml"
 
-  - name: "Application tier" # All HTTP servers use X
+  - name: "Application tier" # All HTTP servers use X, all timeservers, all codeservers
     path: "tier/%{applicationtier}.yaml"
 
     # For a larger multi-corporation, an additional layer should be here
     # for organisation-specific data with assosciated folder.
-    # - name: "GIHS data"
-    #   path: "gihs_common.yaml"
+    # - name: "OrganisationX data"
+    #   path: "orgX_common.yaml"
 
   - name: "Common data"
     path: "common.yaml"

@@ -3,6 +3,7 @@
 # IIS, Nginx, Apache. I would like to standardise on Nginx one
 # day
 class profile::nginx {
+
   package { ['nginx-core', 'fcgiwrap', 'spawn-fcgi']:
     ensure => 'latest',
   }
@@ -16,4 +17,12 @@ class profile::nginx {
       Package['spawn-fcgi'],
     ],
   }
+
+  file { '/etc/nginx/nginx.conf':
+    ensure  => 'present',
+    source  => 'puppet:///modules/profile/nginx/nginx.conf',
+    require => Service['nginx'],
+    notify  => Service['nginx'],
+  }
+
 }
