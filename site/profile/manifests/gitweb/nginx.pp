@@ -20,7 +20,7 @@ class profile::gitweb::nginx {
 
   file { '/etc/nginx/sites-available/git':
     ensure  => present,
-    source  => 'puppet:///files/modules/git/nginx.cfg',
+    source  => 'puppet:///modules/profile/git/nginx.cfg',
     require => Package['nginx-core'],
     notify  => Service['nginx'],
   }

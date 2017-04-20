@@ -40,14 +40,14 @@ class profile::xymon::server {
 
   file { '/etc/xymon/hosts.cfg':
     ensure  => present,
-    source  => 'puppet:///files/modules/xymon/hosts.cfg',
+    source  => 'puppet:///modules/profile/xymon/hosts.cfg',
     require => Package['xymon'],
     notify  => Service['xymon'],
   }
 
   file { '/etc/nginx/sites-available/xymon':
     ensure  => present,
-    source  => 'puppet:///files/modules/xymon/xymon-web.cfg',
+    source  => 'puppet:///modules/profile/xymon/xymon-web.cfg',
     require => Package['nginx-core'],
   }
 
