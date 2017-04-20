@@ -1,4 +1,4 @@
-# CODE server role.
+# CODE server role - providing jenkins and git and gitweb
 class role::codeserver {
   include profile::base
   include profile::codeserver
