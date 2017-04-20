@@ -1,4 +1,4 @@
-# Xymon role
+# Run gitweb within Nginx role
 class role::gitweb {
   include profile::base
   include profile::gitweb
