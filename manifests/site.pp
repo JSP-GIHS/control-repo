@@ -20,5 +20,5 @@ node 'puppet02.curric.gihs.sa.edu.au' {
 }
 
 node 'testclient.curric.gihs.sa.edu.au' {
-  include role::jenkins
+  include role::codeserver
 }
