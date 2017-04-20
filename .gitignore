@@ -1,1 +1,2 @@
-hieradata/nodes/example-puppet-master.yaml
+modules/
+.r10k-deploy.json
