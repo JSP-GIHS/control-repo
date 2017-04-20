@@ -1,6 +1,10 @@
 # Code hosting services (specifically jenkins and gitweb)
 class profile::codeserver {
 
+  package { ['git']:
+    ensure => 'latest',
+  }
+
   File {
     owner => 'root',
     group => 'root',
