@@ -21,7 +21,6 @@ class profile::nginx {
   file { '/etc/nginx/nginx.conf':
     ensure  => 'present',
     source  => 'puppet:///modules/profile/nginx/nginx.conf',
-    require => Service['nginx'],
     notify  => Service['nginx'],
   }
 
