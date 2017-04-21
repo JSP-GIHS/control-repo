@@ -8,10 +8,10 @@ class profile::gitweb {
   }
 
   file { ['/srv', '/srv/git']:
-    ensure => 'directory',
-    owner  => 'www-data',
-    group  => 'www-data',
-    mode   => '6770',
+    ensure  => 'directory',
+    owner   => 'www-data',
+    group   => 'www-data',
+    recurse => true,
   }
 
   $sitename = $::fqdn
