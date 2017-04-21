@@ -14,9 +14,9 @@ class profile::gitweb::nginx inherits profile::gitweb {
   }
 
   file { '/etc/nginx/sites-enabled/gitweb':
-    ensure  => 'symlink',
-    target  => '/etc/nginx/sites-available/gitweb',
-    notify  => Service['nginx'],
+    ensure => 'symlink',
+    target => '/etc/nginx/sites-available/gitweb',
+    notify => Service['nginx'],
   }
 
 }

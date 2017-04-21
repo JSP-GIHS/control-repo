@@ -20,8 +20,8 @@ class profile::puppetboard::nginx inherits profile::puppetboard {
   }
 
   file { '/etc/nginx/sites-enabled/puppetboard':
-    ensure  => 'symlink',
-    target  => '/etc/nginx/sites-available/puppetboard',
-    notify  => Service['nginx'],
+    ensure => 'symlink',
+    target => '/etc/nginx/sites-available/puppetboard',
+    notify => Service['nginx'],
   }
 }

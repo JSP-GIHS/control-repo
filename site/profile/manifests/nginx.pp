@@ -19,9 +19,14 @@ class profile::nginx {
   }
 
   file { '/etc/nginx/nginx.conf':
-    ensure  => 'present',
-    source  => 'puppet:///modules/profile/nginx/nginx.conf',
-    notify  => Service['nginx'],
+    ensure => 'present',
+    source => 'puppet:///modules/profile/nginx/nginx.conf',
+    notify => Service['nginx'],
+  }
+
+  file { '/etc/nginx/sites-enabled/default':
+    ensure => 'absent',
+    notify => Service['nginx'],
   }
 
 }
