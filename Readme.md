@@ -54,3 +54,10 @@ location ~ ^/.*\.sh$ {
 ```
 
 HTTP Basic authentication is insecure. It is strongly recommended that you secure this with an acceptable SSL certificate.
+## Nginx Configuration
+
+Ensure that the `/site/profile/files/nginx/nginx.conf` file has had the resolver line changed to something suitable for your environment:
+
+```
+resolver	\$DNS-IP-1 \$DNS-IP-2 valid=300s;
+```
