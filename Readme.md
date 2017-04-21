@@ -28,36 +28,12 @@ sudo sh -c "echo -n 'xymonadmin:' >> /etc/nginx/.htpasswd"
 sudo sh -c "openssl passwd -apr1 >> /etc/nginx/.htpasswd"
 ```
 
-The secure CGI location will need to be configured under /etc/nginx/sites-available/xymon. It is recommended to only secure the CGI secure area, in which case an additional location block will need to be added *above* the .sh location block
-
-### auth_basic (not recommended)
-```
-location ~ ^/cgi-secure/.*\.sh$ {
-  gzip off;
-  auth_basic "Restricted Area";
-  auth_basic_user_file /etc/nginx/.htpasswd;
-  fastcgi_param SCRIPT_NAME ;
-  fastcgi_param DOCUMENT_ROOT /usr/lib/xymon/;
-  fastcgi_param REMOTE_USER ;
-  include fastcgi_params;
-  fastcgi_pass unix:/var/run/fcgiwrap.socket;
-}
-
-location ~ ^/.*\.sh$ {
-  gzip off;
-  fastcgi_param SCRIPT_NAME ;
-  fastcgi_param DOCUMENT_ROOT /usr/lib/xymon/;
-  fastcgi_param REMOTE_USER ;
-  include fastcgi_params;
-  fastcgi_pass unix:/var/run/fcgiwrap.socket;
-}
-```
-
 HTTP Basic authentication is insecure. It is strongly recommended that you secure this with an acceptable SSL certificate.
+
 ## Nginx Configuration
 
 Ensure that the `/site/profile/files/nginx/nginx.conf` file has had the resolver line changed to something suitable for your environment:
 
 ```
-resolver	\$DNS-IP-1 \$DNS-IP-2 valid=300s;
+resolver	$DNS-IP-1 $DNS-IP-2 valid=300s;
 ```
