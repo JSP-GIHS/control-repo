@@ -10,7 +10,6 @@ class role::puppetdb {
 
   # Puppetboard (and Nginx to run it)
   include profile::nginx
-  include profile::puppetboard
   include profile::puppetboard::nginx
 
 }
