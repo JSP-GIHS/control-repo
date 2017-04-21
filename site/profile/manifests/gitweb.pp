@@ -11,6 +11,7 @@ class profile::gitweb {
     ensure => 'directory',
     owner  => 'www-data',
     group  => 'www-data',
+    mode   => '6770',
   }
 
   $sitename = $::fqdn
