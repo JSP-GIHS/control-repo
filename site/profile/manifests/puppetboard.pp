@@ -42,7 +42,7 @@ class profile::puppetboard {
 
         file { "/lib/systemd/system/${pbservice}":
           ensure  => 'file',
-          content => template('puppetboard/pbuwsgi.erb'),
+          content => template('profile/puppetboard/pbuwsgi.erb'),
         }
 
         file { "/etc/systemd/system/multi-user.target.wants/${pbservice}":

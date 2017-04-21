@@ -15,18 +15,13 @@ class profile::puppetboard::nginx inherits profile::puppetboard {
 
   file { '/etc/nginx/sites-available/puppetboard':
     ensure  => 'file',
-    content => template('puppetboard/nginx.cfg.erb'),
-    require => Service['nginx'],
+    content => template('profile/puppetboard/nginx.cfg.erb'),
     notify  => Service['nginx'],
   }
 
   file { '/etc/nginx/sites-enabled/puppetboard':
     ensure  => 'symlink',
     target  => '/etc/nginx/sites-available/puppetboard',
-    require => [
-      Service['nginx'],
-      File['/etc/nginx/sites-available/puppetboard'],
-    ],
     notify  => Service['nginx'],
   }
 }
