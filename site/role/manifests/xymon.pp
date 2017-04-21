@@ -6,6 +6,5 @@ class role::xymon {
   # Xymon and associated web services
   include profile::nginx
   include profile::xymon
-  include profile::xymon::nginx
 
 }

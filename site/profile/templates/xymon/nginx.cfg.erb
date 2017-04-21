@@ -29,7 +29,7 @@ server {
 	}
 
 	location ~ ^/cgi-secure/.*\.sh$ {
-		auth_basic		"Xymon Secured Location"
+		auth_basic		"Xymon Secured Location";
 		auth_basic_user_file	/etc/nginx/.htpasswd.xymon;
 
 		fastcgi_pass		unix:/var/run/fcgiwrap.socket;

@@ -52,7 +52,6 @@ class profile::xymon::server {
   file { '/etc/nginx/sites-available/xymon':
     ensure  => 'present',
     content => template('profile/xymon/nginx.cfg.erb'),
-    require => Service['nginx'],
     notify  => Service['nginx'],
   }
 
