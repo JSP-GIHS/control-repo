@@ -10,15 +10,12 @@ class profile::gitweb::nginx inherits profile::gitweb {
 
   file { '/etc/nginx/sites-available/gitweb':
     ensure  => 'present',
-    source  => template('gitweb/nginx.cfg.erb'),
-    require => Service['nginx'],
-    notify  => Service['nginx'],
+    content => template('profile/gitweb/nginx.cfg.erb'),
   }
 
   file { '/etc/nginx/sites-enabled/gitweb':
     ensure  => 'symlink',
     target  => '/etc/nginx/sites-available/gitweb',
-    require => Service['nginx'],
     notify  => Service['nginx'],
   }
 
