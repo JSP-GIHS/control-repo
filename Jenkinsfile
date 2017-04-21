@@ -24,6 +24,11 @@ pipeline {
 	sh '/usr/bin/find . -path ./modules -prune -o -name "*.pp" | grep -v "./modules" | xargs /usr/local/bin/puppet-lint --fail-on-warnings --no-puppet_url_without_modules-check'
       }
     }
+    stage('ERB Template Validation') {
+      steps {
+        sh '/usr/bin/find . -path ./modules -prune -o -name "*.erb" | grep -v "./modules" | xargs -I {} sh -c "echo -n \"{}: \" ; erb -P -x -T \"-\" {} | ruby -c"'
+      }
+    }
     stage('r10k Branch Deployment') {
       steps {
         sh "/opt/puppetlabs/puppet/bin/mco rpc r10k deploy environment=${env.BRANCH_NAME}"
