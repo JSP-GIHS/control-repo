@@ -24,8 +24,7 @@ Additionally, create a Pipeline in jenkins by using Blue Ocean (it's easier - an
 Xymon will probably require a htpasswd file created to lock down the appropriate sections of Xymon:
 
 ```
-sudo sh -c "echo -n 'xymonadmin:' >> /etc/nginx/.htpasswd"
-sudo sh -c "openssl passwd -apr1 >> /etc/nginx/.htpasswd"
+sudo sh -c 'printf xymonadmin:$(openssl passwd -apr1)' >> /etc/nginx/.htpasswd"
 ```
 
 HTTP Basic authentication is insecure. It is strongly recommended that you secure this with an acceptable SSL certificate.
