@@ -9,8 +9,8 @@ mod "puppetlabs/puppetdb",                   :latest
 mod "puppetlabs/hocon",                      :latest
 mod "puppetlabs/firewall",                   :latest
 mod "puppetlabs/postgresql",                 :latest
-mod "puppetlabs/apt",                        :latest
-mod "puppetlabs/concat",                     :latest
+mod "puppetlabs/apt",                        '2.4.0'
+mod "puppetlabs/concat",                     '2.2.1'
 
 #
 # Additional Server Setup, choria.io ( mcollective )
