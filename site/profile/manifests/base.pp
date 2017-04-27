@@ -5,12 +5,12 @@ class profile::base {
   include mcollective
 
   case $facts['os']['name'] {
-    'Ubuntu': {
-      include ntp
-      include profile::xymon::client
-    }
     'Windows': {
       include profile::snmp::windows
+    }
+    default: {
+      include ntp
+      include profile::xymon::client
     }
   }
 
