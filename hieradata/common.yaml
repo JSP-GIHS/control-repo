@@ -9,6 +9,10 @@ mcollective_agent_puppet::policies:
     facts: "*"
     classes: "*"
 
+monitor::snmp::community: "snmppublic"
+monitor::snmp::manager: "192.168.10.10"
+monitor::xymon::server: "192.168.10.10"
+
 ntp::autoupdate: true
 ntp::servers:
   - time01.curric.gihs.sa.edu.au iburst
@@ -20,4 +24,3 @@ puppet::puppetdb::listenip: "0.0.0.0"
 r10k::cachedir: "/var/cache/r10k"
 r10k::remote: "https://github.com/JSP-GIHS/control-repo.git"
 
-xymon::server::ip: "192.168.10.10"

@@ -6,6 +6,10 @@ class role::puppetmaster {
 
   include profile::base
 
+  package { 'puppetdb-termini':
+    ensure => 'latest',
+  }
+
   # Mcollective NATS
   include nats
 
@@ -20,5 +24,10 @@ class role::puppetmaster {
     remote => lookup('r10k::remote'),
   }
   include r10k::mcollective
+
+  service { 'puppetserver':
+    ensure  => 'running',
+    enabled => 'true',
+  }
 
 }

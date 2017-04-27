@@ -11,7 +11,7 @@ class profile::xymon::client {
     require => Package['xymon-client'],
   }
 
-  $xymonserver = lookup('xymon::server::ip')
+  $xymonserver = lookup('monitor::xymon::server')
 
   file_line { 'xymonclient_server':
     ensure  => 'present',

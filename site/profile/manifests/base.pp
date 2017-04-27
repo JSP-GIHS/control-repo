@@ -3,7 +3,19 @@
 class profile::base {
 
   include mcollective
-  include ntp
-  include profile::xymon::client
 
+  case $facts['os']['name'] {
+    'Ubuntu': {
+      include ntp
+      include profile::xymon::client
+    }
+    'Windows': {
+      include profile::snmp::windows
+    }
+  }
+
+  service { 'puppet':
+    ensure => 'running',
+    enable => 'true',
+  }
 }

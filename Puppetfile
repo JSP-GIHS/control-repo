@@ -62,3 +62,10 @@ mod "stahnma-epel",                          :latest
 # NTP
 #
 mod "puppetlabs-ntp",                        :latest
+
+#
+# Windows DSC
+#
+mod "puppetlabs-dsc",                        :latest
+mod "puppetlabs-powershell",                 :latest
+mod "puppetlabs-reboot",                     :latest
