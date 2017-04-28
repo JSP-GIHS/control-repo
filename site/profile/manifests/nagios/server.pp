@@ -5,25 +5,25 @@
 # Installing_Nagios_Core_From_Source.pdf is available from the Nagios
 # website. There is no need to make install-webconf
 class profile::nagios::server {
-  
+
   package { ['build-essential', 'php7.0-gd', 'libgd-dev', 'unzip']:
     ensure => 'latest',
   }
-  
+
   file { '/etc/nginx/sites-available/nagios':
     ensure  => 'present',
     content => template('profile/nagios/nginx.cfg.erb'),
     notify  => Service['nginx'],
   }
-  
+
   file { '/etc/nginx/sites-enabled/nagios':
     ensure => 'symlink',
     target => '/etc/nginx/sites-available/nagios',
     notify => Service['nginx'],
   }
-  
+
   file { '/etc/nginx/.htpasswd.nagios':
     ensure => 'present',
   }
-  
+
 }
