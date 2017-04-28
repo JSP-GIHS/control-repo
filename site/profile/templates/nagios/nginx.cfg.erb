@@ -1,0 +1,48 @@
+#########
+#
+# Services for Nagios
+#
+# This isn't as clean as Nginx allows - we assume
+# that only Nagios is in use for this hostname
+#
+#########
+server {
+	listen			80;
+	root			/var/www/html;
+	index			index.php index.html;
+
+	server_name		<%= @hostname %>;
+
+	access_log		/var/log/nginx/nagios-access.log;
+	error_log		/var/log/nginx/nagios-error.log;
+
+	location / {
+		try_files	$uri $uri/ index.php;
+	}
+
+	location /nagios {
+		alias		/usr/local/nagios/share/;
+	}
+
+	location ~ ^/nagios/(.*\.php)$ {
+		alias		/usr/local/nagios/share/$1;
+		include		/etc/nginx/fastcgi.conf;
+
+		fastcgi_param	SCRIPT_FILENAME $document_root;
+		fastcgi_pass	unix:/var/run/php/php7.0-fpm.sock;
+	}
+
+	location ~ \.cgi$ {
+		root		/usr/local/nagios/sbin/;
+		rewrite		^/nagios/cgi-bin/(.*)\.cgi /$1.cgi break;
+		fastcgi_param	AUTH_USER $remote_user;
+		fastcgi_param	REMOTE_USER $remote_user;
+		include		/etc/nginx/fastcgi.conf;
+		fastcgi_pass	unix:/var/run/fcgiwrap.socket;
+	}
+
+	location ~ \.php$ {
+		include		/etc/nginx/fastcgi.conf;
+		fastcgi_pass	unix:/var/run/php/php7.0-fpm.sock;
+	}
+}
