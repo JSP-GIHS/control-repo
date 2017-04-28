@@ -12,7 +12,7 @@ class profile::nagios::server {
   
   group { 'nagcmd':
     ensure  => 'present',
-    members => 'nagios',
+    members => 'nagios,www-data',
   }
   
   group { 'nagios':
@@ -25,7 +25,7 @@ class profile::nagios::server {
     members => 'nagios,nagcmd',
   }
   
-  package { ['build-essential', 'php7.0-gd', 'libgd-dev', 'unzip', 'monitoring-plugins']:
+  package { ['build-essential', 'php7.0-gd', 'libgd-dev', 'unzip']:
     ensure => 'latest',
   }
   
