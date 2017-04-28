@@ -1,5 +1,6 @@
 # Resolv.conf managed by puppet. Do not edit!
 
+search <%= @searchdomain %>
 <% [@nameservers].flatten.each do |ns| -%>
 nameserver <%= ns %>
 <% end -%>
