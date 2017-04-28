@@ -1,0 +1,5 @@
+# Resolv.conf managed by puppet. Do not edit!
+
+<% [@nameservers].flatten.each do |ns| -%>
+nameserver <%= ns %>
+<% end -%>

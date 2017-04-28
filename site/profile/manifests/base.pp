@@ -9,6 +9,7 @@ class profile::base {
       include profile::snmp::windows
     }
     default: {
+      include dns
       include ntp
       include profile::xymon::client
       include profile::snmp::linux

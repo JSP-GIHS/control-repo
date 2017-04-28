@@ -1,5 +1,9 @@
 version: 5
 
+dns::nameservers:
+  - 192.168.10.10
+  - 192.168.10.11
+
 filebucketserver: "puppet.curric.gihs.sa.edu.au"
 
 mcollective_agent_puppet::policies:
