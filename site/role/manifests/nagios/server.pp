@@ -4,6 +4,6 @@ class role::nagios::server {
   include profile::base
   include profile::nginx::php
   include profile::nginx::cgi
-  include profiel::nagios::server
+  include profile::nagios::server
 
 }
