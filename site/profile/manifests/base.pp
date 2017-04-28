@@ -11,6 +11,7 @@ class profile::base {
     default: {
       include ntp
       include profile::xymon::client
+      include profile::snmp::linux
     }
   }
 
