@@ -6,25 +6,6 @@
 # website. There is no need to make install-webconf
 class profile::nagios::server {
   
-  user { 'nagios':
-    ensure => 'present',
-  }
-  
-  group { 'nagcmd':
-    ensure  => 'present',
-    members => 'nagios,www-data',
-  }
-  
-  group { 'nagios':
-    ensure  => 'present',
-    members => 'nagios,www-data',
-  }
-
-  group { 'www-data':
-    ensure  => 'present',
-    members => 'nagios,nagcmd',
-  }
-  
   package { ['build-essential', 'php7.0-gd', 'libgd-dev', 'unzip']:
     ensure => 'latest',
   }
