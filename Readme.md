@@ -24,7 +24,7 @@ Additionally, create a Pipeline in jenkins by using Blue Ocean (it's easier - an
 Xymon will probably require a htpasswd file created to lock down the appropriate sections of Xymon:
 
 ```
-sudo sh -c 'printf xymonadmin:$(openssl passwd -apr1)' >> /etc/nginx/.htpasswd"
+sudo sh -c 'printf xymonadmin:$(openssl passwd -apr1)' >> /etc/nginx/.htpasswd.xymon"
 ```
 
 HTTP Basic authentication is insecure. It is strongly recommended that you secure this with an acceptable SSL certificate.
@@ -36,3 +36,66 @@ Ensure that the `/site/profile/files/nginx/nginx.conf` file has had the resolver
 ```
 resolver	$DNS-IP-1 $DNS-IP-2 valid=300s;
 ```
+
+## Nagios Configuration
+
+The [Nagios Guide](https://assets.nagios.com/downloads/nagioscore/docs/Installing_Nagios_Core_From_Source.pdf) is your best source of information here. However, creating a Nagios installation with the roles here is simple enough for Ubuntu.
+
+Add the role to the node in question:
+
+    node 'nagios01.dev.internal' {
+      include role::nagios::server
+    }
+
+After a puppet run as completed, the www-data user and www-data group will exist as will the appropriate build tools for Nagios. It is important that this is executed because because fcgiwrap runs as www-data, and will need to be in the nagcmd group to be able to run CGI scripts for Nagios, and we need to compile nagios and nagios-plugins.
+
+    /opt/puppetlabs/puppet/bin/puppet agent --test
+    useradd nagios
+    groupadd nagcmd
+    usermod -a -G nagcmd nagios
+    usermod -a -G nagios,nagcmd www-data
+    service fcgiwrap restart
+
+Download the nagios and nagios-plugins files to a directory on the nagios server (I just drop them into /tmp/), unzip, configure, and install. Note that the ./configure command should be run correctly, this is purely an example.
+
+    cd /tmp
+    tar zxf nagios-4.3.1.tar.gz
+    tar zxf nagios-plugins-2.2.1.tar.gz
+    cd nagios-4.3.1
+    ./configure --with-command-group=nagcmd
+    --snip--
+    make all
+    make install
+    make install-init
+    make install-config
+    make install-commandmode
+
+Note: It is not an error that we did not install-webconf here.
+
+    cp -R contrib/eventhandlers/ /usr/local/nagios/libexec/
+    chown -R nagios:nagios /usr/local/nagios/libexec/eventhandlers
+
+Verify the configuration before we move on:
+
+    /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+
+Register with systemd:
+
+    systemctl daemon-reload
+
+Compile and install the nagios plugins:
+
+    cd /tmp/nagios-plugins-2.2.1
+    ./configure --with-nagios-user=nagios --with-nagios-group=nagios
+    make
+    make install
+
+Finally, add a user to /etc/nginx/.htpasswd.nagios:
+
+    sudo sh -c 'printf nagiosadmin:$(openssl passwd -apr1)' >> /etc/nginx/.htpasswd.nagios
+
+And start Nagios:
+
+    service nagios start
+
+That's it for the setup.
