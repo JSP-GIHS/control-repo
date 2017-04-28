@@ -6,16 +6,12 @@ Currently this repository and the configurations in it are hard coded for our te
 
 The only manual requirements to set up after puppet01 and puppet02 have come online (assuming DNS or Hosts are ok) is to create and sign a mcollective request for the jenkins user in one terminal:
 
-```
-sudo -i -u jenkins
-/opt/puppetlabs/puppet/bin/mco choria request_cert
-```
+    sudo -i -u jenkins
+    /opt/puppetlabs/puppet/bin/mco choria request_cert
 
 And sign this request by the puppet master:
 
-```
-sudo /opt/puppetlabs/bin/puppet cert sign jenkins.mcollective
-```
+    sudo /opt/puppetlabs/bin/puppet cert sign jenkins.mcollective
 
 Additionally, create a Pipeline in jenkins by using Blue Ocean (it's easier - and read only from github is a git repository with an https:// URL).
 
@@ -23,9 +19,7 @@ Additionally, create a Pipeline in jenkins by using Blue Ocean (it's easier - an
 
 Xymon will probably require a htpasswd file created to lock down the appropriate sections of Xymon:
 
-```
-sudo sh -c 'printf xymonadmin:$(openssl passwd -apr1)' >> /etc/nginx/.htpasswd.xymon"
-```
+    sudo sh -c 'printf xymonadmin:$(openssl passwd -apr1)' >> /etc/nginx/.htpasswd.xymon"
 
 HTTP Basic authentication is insecure. It is strongly recommended that you secure this with an acceptable SSL certificate.
 
@@ -33,9 +27,7 @@ HTTP Basic authentication is insecure. It is strongly recommended that you secur
 
 Ensure that the `/site/profile/files/nginx/nginx.conf` file has had the resolver line changed to something suitable for your environment:
 
-```
-resolver	$DNS-IP-1 $DNS-IP-2 valid=300s;
-```
+    resolver	$DNS-IP-1 $DNS-IP-2 valid=300s;
 
 ## Nagios Configuration
 
@@ -47,7 +39,7 @@ Add the role to the node in question:
       include role::nagios::server
     }
 
-After a puppet run as completed, the www-data user and www-data group will exist as will the appropriate build tools for Nagios. It is important that this is executed because because fcgiwrap runs as www-data, and will need to be in the nagcmd group to be able to run CGI scripts for Nagios, and we need to compile nagios and nagios-plugins.
+After a puppet run as completed, the www-data user and www-data group will exist as will the appropriate build tools for Nagios. It is important that this is executed because fcgiwrap runs as www-data, and will need to be in the nagcmd group to be able to run CGI scripts for Nagios, and we need to compile nagios and nagios-plugins.
 
     /opt/puppetlabs/puppet/bin/puppet agent --test
     useradd nagios
