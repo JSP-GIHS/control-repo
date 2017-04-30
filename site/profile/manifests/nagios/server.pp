@@ -40,7 +40,7 @@ class profile::nagios::server {
       'nagcmd',
     ],
     require => [
-      Groups['nagcmd'],
+      Group['nagcmd'],
     ],
   }
 
