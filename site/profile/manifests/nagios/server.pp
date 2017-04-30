@@ -26,4 +26,34 @@ class profile::nagios::server {
     ensure => 'present',
   }
 
+  group { 'nagcmd':
+    ensure => 'present',
+  }
+
+  group { 'nagios':
+    ensure => 'present',
+  }
+
+  user { 'nagios':
+    ensure  => 'present',
+    groups  => [
+      'nagcmd',
+    ],
+    require => [
+      Groups['nagcmd'],
+    ],
+  }
+
+  user { 'www-data':
+    ensure  => 'present',
+    groups  => [
+      'nagcmd',
+      'nagios',
+    ],
+    require => [
+      Group['nagcmd'],
+      Group['nagios'],
+    ],
+  }
+
 }
