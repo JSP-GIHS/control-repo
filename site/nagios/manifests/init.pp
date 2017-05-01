@@ -77,8 +77,8 @@ class nagios {
   if $hostgroups {
     $hostgroups.each |String $hgname| {
       nagios::resource { $hgname:
-        type   => 'hostgroup',
-        export => false,
+        type     => 'hostgroup',
+        exported => false,
       }
     }
   }
