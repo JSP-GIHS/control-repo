@@ -56,4 +56,27 @@ class profile::nagios::server {
     ],
   }
 
+  service { 'nagios':
+    ensure => 'running',
+    enable => true,
+  }
+
+  file { 'nagios-resource-d':
+    path   => '/usr/local/nagios/etc/resource.d',
+    ensure => 'directory',
+    owner  => 'nagios',
+    group  => 'nagios',
+  }
+
+  Nagios_host <<||>> {
+    owner   => 'nagios',
+    group   => 'nagios',
+    require => [
+      File['resource-d'],
+      User['nagios'],
+      Group['nagios'],
+    ],
+    notify  => Service['nagios'],
+  }
+
 }
