@@ -9,7 +9,7 @@ define nagios::resource::hostgroup(
   include nagios::params
 
   if $exported {
-    fail("It is not appropriate to export the Nagios_hostgroup type")
+    fail('It is not appropriate to export the Nagios_hostgroup type')
   } else {
     nagios_hostgroup { $name:
       ensure  => $ensure,

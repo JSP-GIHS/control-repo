@@ -11,6 +11,11 @@ define nagios::resource::host (
 
   include nagios::params
 
+  $selectedhostgroups = $hostgroups ? {
+    ''      => undef,
+    default => $hostgroups,
+  }
+
   if $exported {
 
     @@nagios_host { $name:
@@ -19,10 +24,7 @@ define nagios::resource::host (
       check_command => $check_command,
       use           => $use,
       target        => $target,
-      hostgroups    => $hostgroups ? {
-        ''      => undef,
-	default => $hostgroups,
-      },
+      hostgroups    => $selectedhostgroups,
     }
 
   } else {
@@ -34,10 +36,7 @@ define nagios::resource::host (
       use           => $use,
       target        => $target,
       require       => File[$nagios::params::resourced],
-      hostgroups    => $hostgroups ? {
-        ''      => undef,
-	default => $hostgroups,
-      },
+      hostgroups    => $selectedhostgroups,
     }
 
   }
