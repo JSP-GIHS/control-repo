@@ -39,13 +39,12 @@ Add the role to the node in question:
       include role::nagios::server
     }
 
-After a puppet run as completed, the www-data user and www-data group will exist as will the appropriate build tools for Nagios. It is important that this is executed because fcgiwrap runs as www-data, and will need to be in the nagcmd group to be able to run CGI scripts for Nagios, and we need to compile nagios and nagios-plugins.
+After a puppet run as completed, the www-data user and www-data group will exist as will the appropriate build tools for Nagios. It is important that this puppet run is executed because fcgiwrap runs as www-data, and will need to be in the nagcmd group to be able to run CGI scripts for Nagios, and we need to compile nagios and nagios-plugins. Note that the puppet run will fail as Nagios Core is not yet installed.
 
     /opt/puppetlabs/puppet/bin/puppet agent --test
-    useradd nagios
-    groupadd nagcmd
-    usermod -a -G nagcmd nagios
-    usermod -a -G nagios,nagcmd www-data
+
+Restart the fcgiwrap service to obtain the new group information:
+
     service fcgiwrap restart
 
 Download the nagios and nagios-plugins files to a directory on the nagios server (I just drop them into /tmp/), unzip, configure, and install. Note that the ./configure command should be run correctly, this is purely an example.
