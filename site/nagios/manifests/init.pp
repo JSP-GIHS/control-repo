@@ -4,6 +4,10 @@
 #
 # Installing_Nagios_Core_From_Source.pdf is available from the Nagios
 # website. There is no need to make install-webconf
+#
+# Rather than passing class parameters which would mean I can't use
+# the pretty-form monitor::nagios::hostgroups we will do a hiera
+# lookup for these values
 class nagios {
 
   include nagios::params
@@ -67,6 +71,16 @@ class nagios {
     ensure => 'directory',
     path   => $nagios::params::resourced,
     owner  => $nagios::params::user,
+  }
+
+  $hostgroups = lookup('monitor::nagios::hostgroups')
+  if $hostgroups {
+    $hostgroups.each |String $hgname| {
+      nagios::resource { $hgname:
+        type   => 'hostgroup',
+        export => false,
+      }
+    }
   }
 
   Nagios_host <<||>> {
