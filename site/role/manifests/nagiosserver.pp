@@ -1,5 +1,5 @@
 # Configure a Nagios capable server
-class role::nagios::server {
+class role::nagiosserver {
 
   include profile::base
   include profile::nginx::php

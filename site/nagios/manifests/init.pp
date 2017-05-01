@@ -14,7 +14,7 @@ class nagios {
 
   file { '/etc/nginx/sites-available/nagios':
     ensure  => 'present',
-    content => template('profile/nagios/nginx.cfg.erb'),
+    content => template('nagios/nginx.cfg.erb'),
     notify  => Service['nginx'],
   }
 
