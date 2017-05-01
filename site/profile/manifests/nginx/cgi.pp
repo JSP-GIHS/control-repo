@@ -12,4 +12,10 @@ class profile::nginx::cgi inherits profile::nginx {
     ],
   }
 
+  service { 'fcgiwrap':
+    ensure  => 'running',
+    enable  => true,
+    require => Package['fcgiwrap'],
+  }
+
 }
