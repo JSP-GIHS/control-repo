@@ -9,22 +9,13 @@ class nagios::export {
     $templatetype = 'linux'
   }
 
-  $addresstemplate = @(END/L)
-    <%= has_variable ? ('my_nagios_interface') ?\
-    eval('ipaddress_' + my_nagios_interface) : ipaddress %>
-    |-END
-
-  $hostgrouptemplate = @(END/L)
-    <%= has_variable ? ('my_nagios_hostgroups') ?\
-    $my_nagios_hostgroups : 'Other' %>
-    |-END
-
-  @@nagios_host { $::fqdn:
+  nagios::resource { $::fqdn:
     type          => 'host',
-    address       => inline_template($addresstemplate),
-    hostgroups    => inline_template($hostgrouptemplate),
-    use           => "${templatetype}-server",
-    export        => true,
+    address       => $::ipaddress,
+    hostgroups    => "${templatetype}-servers",
+    host_use      => "${templatetype}-server",
+    check_command => 'check_ping!2000.00,80%!4000.00,100%!4',
+    exported      => true,
   }
 
 }

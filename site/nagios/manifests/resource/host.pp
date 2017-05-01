@@ -2,7 +2,7 @@
 define nagios::resource::host (
   $address,
   $hostgroups,
-  $export,
+  $exported,
   $target,
   $check_command,
   $use,
@@ -11,9 +11,9 @@ define nagios::resource::host (
 
   include nagios::params
 
-  if $export {
+  if $exported {
 
-    @nagios_host { $name:
+    @@nagios_host { $name:
       ensure        => $ensure,
       address       => $address,
       check_command => $check_command,

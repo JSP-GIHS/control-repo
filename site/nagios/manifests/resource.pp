@@ -1,6 +1,6 @@
 # Create custom resource definitions
 define nagios::resource (
-  $export,
+  $exported,
   $type,
   $host_use = 'generic-host',
   $ensure = 'present',
@@ -12,17 +12,12 @@ define nagios::resource (
 
   include nagios::params
 
-  $targettemplate = @(END/L)
-    ${nagios::params::resourced/${type}_\
-    <%=name.gsub(/\\s+/, '_').downcase %>.cfg\
-    |-END
+  $target = "${nagios::params::resourced}/${type}_${name}.cfg"
 
-  $target = inline_template( $targettemplate )
-
-  case $export {
+  case $exported {
     true, false: {}
     default: {
-      fail("The export parameter must be true or false")
+      fail("The exported parameter must be true or false")
     }
   }
 
@@ -35,14 +30,14 @@ define nagios::resource (
 	address       => $address,
 	hostgroups    => $hostgroups,
 	target        => $target,
-	export        => $export,
+	exported      => $exported,
       }
     }
     'hostgroup': {
       nagios::resource::hostgroup { $name:
-        ensure => $ensure,
-	target => $target,
-	export => $export,
+        ensure   => $ensure,
+	target   => $target,
+	exported => $exported,
       }
     }
     default: {
@@ -52,7 +47,7 @@ define nagios::resource (
 
   nagios::resource::file { $target:
     ensure       => $ensure,
-    export       => $export,
+    exported     => $exported,
     resource_tag => "nagios_${type}",
     requires     => "Nagios_${type}[${name}]",
   }

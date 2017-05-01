@@ -3,12 +3,12 @@ define nagios::resource::hostgroup(
   $target,
   $ensure = 'present',
   $hostgroup_alias = '',
-  $export = false,
+  $exported = false,
 ) {
 
   include nagios::params
 
-  if $export {
+  if $exported {
     fail("It is not appropriate to export the Nagios_hostgroup type")
   } else {
     nagios_hostgroup { $name:

@@ -2,13 +2,13 @@
 define nagios::resource::file (
   $resource_tag,
   $requires,
-  $export = true,
+  $exported = true,
   $ensure = 'present',
 ) {
 
   include nagios::params
 
-  if $export {
+  if $exported {
 
     @@file { $name:
       ensure  => $ensure,

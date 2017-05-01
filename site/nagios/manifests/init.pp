@@ -4,7 +4,9 @@
 #
 # Installing_Nagios_Core_From_Source.pdf is available from the Nagios
 # website. There is no need to make install-webconf
-class profile::nagios::server {
+class nagios {
+
+  include nagios::params
 
   package { ['build-essential', 'php7.0-gd', 'libgd-dev', 'unzip']:
     ensure => 'latest',
@@ -34,7 +36,7 @@ class profile::nagios::server {
     ensure => 'present',
   }
 
-  user { 'nagios':
+  user { $nagios::params::user:
     ensure  => 'present',
     groups  => [
       'nagcmd',
@@ -61,19 +63,17 @@ class profile::nagios::server {
     enable => true,
   }
 
-  file { 'nagios-resource-d':
-    path   => '/usr/local/nagios/etc/resource.d',
+  file { $nagios::params::resourced:
+    path   => $nagios::params::resourced,
     ensure => 'directory',
-    owner  => 'nagios',
-    group  => 'nagios',
+    owner  => $nagios::params::user,
   }
 
   Nagios_host <<||>> {
-    owner   => 'nagios',
-    group   => 'nagios',
+    owner   => $nagios::params::user,
     require => [
-      File['resource-d'],
-      User['nagios'],
+      File[$nagios::params::resourced],
+      User[$nagios::params::user],
       Group['nagios'],
     ],
     notify  => Service['nagios'],

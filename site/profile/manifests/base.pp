@@ -15,6 +15,8 @@ class profile::base {
     }
   }
 
+  include nagios::export
+
   service { 'puppet':
     ensure => 'running',
     enable => true,
