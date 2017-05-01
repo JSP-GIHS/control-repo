@@ -17,7 +17,7 @@ define nagios::resource (
   case $exported {
     true, false: {}
     default: {
-      fail("The exported parameter must be true or false")
+      fail('The exported parameter must be true or false')
     }
   }
 
@@ -25,23 +25,23 @@ define nagios::resource (
     'host': {
       nagios::resource::host { $name:
         ensure        => $ensure,
-	use           => $host_use,
-	check_command => $check_command,
-	address       => $address,
-	hostgroups    => $hostgroups,
-	target        => $target,
-	exported      => $exported,
+        use           => $host_use,
+        check_command => $check_command,
+        address       => $address,
+        hostgroups    => $hostgroups,
+        target        => $target,
+        exported      => $exported,
       }
     }
     'hostgroup': {
       nagios::resource::hostgroup { $name:
         ensure   => $ensure,
-	target   => $target,
-	exported => $exported,
+        target   => $target,
+        exported => $exported,
       }
     }
     default: {
-      fail("Unknown type passed to this define: $type")
+      fail("Unknown type passed to this define: ${type}")
     }
   }
 

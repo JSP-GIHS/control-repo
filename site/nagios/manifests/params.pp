@@ -12,7 +12,7 @@ class nagios::params {
       $service = 'nagios'
     }
     default: {
-      fail("This module is not supported on $::operatingsystem")
+      fail("This module is not supported on ${::operatingsystem}")
     }
   }
 

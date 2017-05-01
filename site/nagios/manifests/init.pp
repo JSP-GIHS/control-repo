@@ -64,8 +64,8 @@ class nagios {
   }
 
   file { $nagios::params::resourced:
-    path   => $nagios::params::resourced,
     ensure => 'directory',
+    path   => $nagios::params::resourced,
     owner  => $nagios::params::user,
   }
 
