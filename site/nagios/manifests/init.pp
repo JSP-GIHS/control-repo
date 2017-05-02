@@ -73,6 +73,13 @@ class nagios {
     owner  => $nagios::params::user,
   }
 
+  file_line { '/usr/local/nagios/etc/nagios.cfg':
+    ensure => 'present',
+    path   => '/usr/local/nagios/etc/nagios.cfg',
+    line   => "cfg_dir=${nagios::params::resourced}",
+    notify => Service['nagios'],
+  }
+
   $hostgroups = lookup('monitor::nagios::hostgroups')
   if $hostgroups {
     $hostgroups.each |String $hgname| {
