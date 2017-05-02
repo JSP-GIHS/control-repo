@@ -28,12 +28,3 @@ class nagios::export (
   }
 
 }
-  $hostgroups = lookup('monitor::nagios::hostgroups')
-  if $hostgroups {
-    $hostgroups.each |String $hgname| {
-      nagios::resource { $hgname:
-        type     => 'hostgroup',
-        exported => false,
-      }
-    }
-  }
