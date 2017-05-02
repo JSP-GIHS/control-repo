@@ -1,6 +1,6 @@
 mcollective::client: true
 
-nagios::hostgroups:
+nagios::export::hostgroups:
   - code-servers
 
 profile::jenkins::plugins:
