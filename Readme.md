@@ -49,30 +49,25 @@ Restart the fcgiwrap service to obtain the new group information:
 
 Download the nagios and nagios-plugins files to a directory on the nagios server (I just drop them into /tmp/), unzip, configure, and install. Note that the ./configure command should be run correctly, this is purely an example.
 
+Note: It is not an error that we did not install-webconf here.
+
     cd /tmp
     tar zxf nagios-4.3.1.tar.gz
     tar zxf nagios-plugins-2.2.1.tar.gz
     cd nagios-4.3.1
     ./configure --with-command-group=nagcmd
-    --snip--
     make all
     make install
     make install-init
     make install-config
     make install-commandmode
-
-Note: It is not an error that we did not install-webconf here.
-
     cp -R contrib/eventhandlers/ /usr/local/nagios/libexec/
     chown -R nagios:nagios /usr/local/nagios/libexec/eventhandlers
+    systemctl daemon-reload
 
 Verify the configuration before we move on:
 
     /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
-
-Register with systemd:
-
-    systemctl daemon-reload
 
 Compile and install the nagios plugins:
 
