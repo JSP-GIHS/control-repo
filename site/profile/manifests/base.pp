@@ -17,8 +17,22 @@ class profile::base {
 
   include nagios::export
 
+  File {
+    owner => 'root',
+    group => 'root',
+  }
+
+  file { ['/etc/puppetlabs/facter', '/etc/puppetlabs/facter/facts.d']:
+    ensure => 'directory',
+  }
+
+  file { '/etc/puppetlabs/facter/facts.d/facts.yaml':
+    ensure => 'present',
+  }
+
   service { 'puppet':
     ensure => 'running',
     enable => true,
   }
+
 }
