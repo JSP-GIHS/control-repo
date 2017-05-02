@@ -31,6 +31,16 @@ Ensure that the `/site/profile/files/nginx/nginx.conf` file has had the resolver
 
 ## Nagios Configuration
 
+Apply the nagios::export class to the profile::base class if you are not using this repository. The Nagios export class will default to one of two hostgroups `linux-servers` or `windows-servers`. This cannot be overridden without modification to the module, but additional hostgroups can be added by applying specific additions in hiera:
+
+    nagios::export::hostgroups:
+      - code-servers
+
+Be aware that any hostgroups that appear in this section will need to be available on the monitoring server as well (in this repository, it is kept in hieradata/common.yaml):
+
+    monitor::nagios::hostgroups:
+      - code-servers
+
 The [Nagios Guide](https://assets.nagios.com/downloads/nagioscore/docs/Installing_Nagios_Core_From_Source.pdf) is your best source of information here. However, creating a Nagios installation with the roles here is simple enough for Ubuntu.
 
 Add the role to the node in question:
