@@ -1,5 +1,8 @@
 mcollective::client: true
 
+nagios::hostgroups:
+  - code-servers
+
 profile::jenkins::plugins:
   # If you turn on Pipeline and Git Plugin, you end with this list
   - ace-editor
