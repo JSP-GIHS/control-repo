@@ -22,4 +22,16 @@ class managedfirewall {
     action => 'accept',
   }
 
+  firewall { '0161 allow snmp':
+    port   => '161',
+    proto  => 'udp',
+    action => 'accept',
+  }
+
+  firewall { '5666 allow nagios: nrpe':
+    port   => '5666',
+    proto  => 'tcp',
+    action => 'accept',
+  }
+
 }
