@@ -100,20 +100,6 @@ class nagios {
 
   $commandtarget = "${nagios::params::resourced}/commands"
 
-  nagios_command { 'check_snmp':
-    command_line => '$USER1$/check_snmp -H $HOSTADDRESS$ $ARG1$',
-    target       => "${commandtarget}/check_snmp.cfg",
-    owner        => $nagios::params::user,
-    notify       => Service['nagios'],
-  }
-
-  nagios_command { 'check_ping':
-    command_line => '$USER1$/check_ping -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$ -p 5',
-    target       => "${commandtarget}/check_ping.cfg",
-    owner        => $nagios::params::user,
-    notify       => Service['nagios'],
-  }
-
   $servicetarget = "${nagios::params::resourced}/services"
 
   nagios_service { 'check_ping':
@@ -128,13 +114,14 @@ class nagios {
   }
 
   Nagios_host <<||>> {
-    owner   => $nagios::params::user,
-    require => [
+    owner         => $nagios::params::user,
+    check_command => 'check-host-alive',
+    require       => [
       File[$nagios::params::resourced],
       User[$nagios::params::user],
       Group['nagios'],
     ],
-    notify  => Service['nagios'],
+    notify        => Service['nagios'],
   }
 
 }
