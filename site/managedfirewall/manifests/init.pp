@@ -16,9 +16,9 @@ class managedfirewall {
   include managedfirewall::post
   include firewall
 
-  # Stupid rule. Just in case.
-  firewall { '0100 allow all':
-    proto  => 'all',
+  firewall { '0022 allow ssh':
+    port   => '22',
+    proto  => 'tcp',
     action => 'accept',
   }
 
