@@ -103,12 +103,14 @@ class nagios {
   nagios_command { 'check_snmp':
     command_line => '$USER1$/check_snmp -H $HOSTADDRESS$ $ARG1$',
     target       => "${commandtarget}/check_snmp.cfg",
+    owner        => $nagios::params::user,
     notify       => Service['nagios'],
   }
 
   nagios_command { 'check_ping':
-    command_line => '$USER1$/check_ping -H $HOSTADDRESS$ $ARG1$',
+    command_line => '$USER1$/check_ping -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$ -p 5',
     target       => "${commandtarget}/check_ping.cfg",
+    owner        => $nagios::params::user,
     notify       => Service['nagios'],
   }
 
@@ -119,8 +121,9 @@ class nagios {
     use                 => 'local-service',
     service_description => 'ICMP Echo Request',
     hostgroup_name      => 'windows-servers,linux-servers',
-    check_command       => 'check_ping!100,20%!200,30%',
+    check_command       => 'check_ping!100.0,20%!500.0,60%',
     target              => "${servicetarget}/check_ping.cfg",
+    owner               => $nagios::params::user,
     notify              => Service['nagios'],
   }
 
