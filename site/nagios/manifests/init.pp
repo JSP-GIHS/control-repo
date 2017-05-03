@@ -67,9 +67,10 @@ class nagios {
     enable => true,
   }
 
-  file { [$nagios::params::resourced, "${nagios::params::resourced}/commands"]:
+  file { [ $nagios::params::resourced,
+    "${nagios::params::resourced}/commands",
+    "${nagios::params::resourced}/services" ]:
     ensure => 'directory',
-    path   => $nagios::params::resourced,
     owner  => $nagios::params::user,
   }
 
@@ -97,15 +98,21 @@ class nagios {
     }
   }
 
+  $commandtarget = "${nagios::params::resourced}/commands"
+
   nagios_command { 'check_snmp':
     command_line => '$USER1$/check_snmp -H $HOSTADDRESS$ $ARG1$',
-    target       => "${nagios::params::resourced}/commands/check_snmp.cfg",
+    target       => "${commandtarget}/check_snmp.cfg",
+    notify       => Service['nagios'],
   }
 
   nagios_command { 'check_ping':
     command_line => '$USER1$/check_ping -H $HOSTADDRESS$ $ARG1$',
-    target       => "${nagios::params::resourced}/commands/check_ping.cfg",
+    target       => "${commandtarget}/check_ping.cfg",
+    notify       => Service['nagios'],
   }
+
+  $servicetarget = "${nagios::params::resourced}/services"
 
   nagios_service { 'check_ping':
     ensure              => 'present',
@@ -113,6 +120,8 @@ class nagios {
     service_description => 'ICMP Echo Request',
     hostgroup_name      => 'windows-servers,linux-servers',
     check_command       => 'check_ping!100,20%!200,30%',
+    target              => "${servicetarget}/check_ping.cfg",
+    notify              => Service['nagios'],
   }
 
   Nagios_host <<||>> {
