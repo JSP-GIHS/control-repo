@@ -18,6 +18,8 @@ monitor::nagios::hostgroups:
   - security-servers
   - camera-servers
   - code-servers
+  - windows-servers
+  - linux-servers
 monitor::snmp::community: "snmppublic"
 monitor::snmp::manager: "192.168.10.10"
 monitor::xymon::server: "192.168.10.10"

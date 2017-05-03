@@ -73,10 +73,17 @@ class nagios {
     owner  => $nagios::params::user,
   }
 
-  file_line { '/usr/local/nagios/etc/nagios.cfg':
+  file_line { '/usr/local/nagios/etc/nagios.cfg_resourced':
     ensure => 'present',
     path   => '/usr/local/nagios/etc/nagios.cfg',
     line   => "cfg_dir=${nagios::params::resourced}",
+    notify => Service['nagios'],
+  }
+
+  file_line { '/usr/local/nagios/etc/nagios.cfg_localhostcfg':
+    ensure => 'absent',
+    path   => '/usr/local/nagios/etc/nagios.cfg',
+    line   => 'cfg_file=/usr/local/nagios/etc/objects/localhost.cfg',
     notify => Service['nagios'],
   }
 
