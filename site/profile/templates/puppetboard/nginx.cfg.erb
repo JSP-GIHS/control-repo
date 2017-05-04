@@ -11,12 +11,16 @@ upstream puppetboard {
 }
 
 server {
-	listen			80;
+	listen			443;
 	root			/var/www/html;
 	index			index.html;
 
-	server_name		<%= @hostname %>;
+	server_name		<%= @fqdn %>;
 	charset			utf-8;
+
+	ssl			on;
+	ssl_certificate		/etc/puppetlabs/puppet/ssl/certs/<%= @fqdn %>.pem;
+	ssl_certificate_key	/etc/puppetlabs/puppet/ssl/private_keys/<%= @fqdn %>.pem;
 
 	access_log		/var/log/nginx/puppetboard-access.log;
 	error_log		/var/log/nginx/puppetboard-error.log;

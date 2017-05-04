@@ -7,14 +7,18 @@
 #
 #########
 server {
-	listen				80;
+	listen				443;
 	root				/usr/lib/xymon/server/www;
 	index				index.html;
 
-	server_name			<%= @hostname %>;
+	server_name			<%= @fqdn %>;
 
 	access_log			/var/log/nginx/xymon-access.log;
 	error_log			/var/log/nginx/xymon-error.log;
+
+	ssl				on;
+	ssl_certificate			/etc/puppetlabs/puppet/ssl/certs/<%= @fqdn %>.pem;
+	ssl_certificate_key		/etc/puppetlabs/puppet/ssl/private_keys/<%= @fqdn %>.pem;
 
 	location /xymon/ {
 		alias			/usr/lib/xymon/server/www/;
