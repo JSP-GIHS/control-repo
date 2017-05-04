@@ -4,6 +4,8 @@
 # day
 class profile::nginx {
 
+  include openssl
+
   package { ['nginx-core', 'fcgiwrap', 'spawn-fcgi']:
     ensure => 'latest',
   }
@@ -22,6 +24,16 @@ class profile::nginx {
     ensure => 'present',
     source => 'puppet:///modules/profile/nginx/nginx.conf',
     notify => Service['nginx'],
+  }
+
+  file { '/etc/nginx/ssl':
+    ensure => 'directory',
+  }
+
+  openssl::dhparam { '/etc/nginx/ssl/dhparam.pem':
+    size    => 4096,
+    require => File['/etc/nginx/ssl'],
+    notify  => Service['nginx'],
   }
 
   file { '/etc/nginx/sites-enabled/default':

@@ -69,3 +69,7 @@ mod "puppetlabs-ntp",                        :latest
 mod "puppetlabs-dsc",                        :latest
 mod "puppetlabs-powershell",                 :latest
 mod "puppetlabs-reboot",                     :latest
+
+#
+# DHParam Generation (Nginx Where needed)
+mod "camptocamp-openssl",                    :latest
