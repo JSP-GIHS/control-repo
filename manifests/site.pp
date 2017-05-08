@@ -1,10 +1,10 @@
-filebucket { 'main':
+filebucket { 'filebucketserver':
   path   => false,
   server => lookup('filebucketserver'),
 }
 
 File {
-  backup => main,
+  backup => filebucketserver,
 }
 
 node 'default' {
