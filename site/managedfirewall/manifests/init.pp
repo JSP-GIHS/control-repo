@@ -3,15 +3,6 @@
 # and post rules
 class managedfirewall {
 
-  resources { 'firewall':
-    purge => true,
-  }
-
-  Firewall {
-    before  => Class['managedfirewall::post'],
-    require => Class['managedfirewall::pre'],
-  }
-
   include managedfirewall::pre
   include managedfirewall::post
   include firewall

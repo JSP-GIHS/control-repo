@@ -12,6 +12,9 @@ class profile::base {
       include ntp
       include profile::xymon::client
       include profile::snmp::linux
+      include managedfirewall::pre
+      include managedfirewall::post
+      include firewall
     }
   }
 

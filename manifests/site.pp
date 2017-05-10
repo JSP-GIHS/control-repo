@@ -7,6 +7,19 @@ File {
   backup => filebucketserver,
 }
 
+resources { 'firewall':
+  purge => true,
+}
+
+resources { 'firewallchain':
+  purge => true,
+}
+
+Firewall {
+  before  => Class['managedfirewall::post'],
+  require => Class['managedfirewall::pre'],
+}
+
 node 'default' {
   include profile::base
 }
