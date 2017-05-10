@@ -36,7 +36,7 @@ pipeline {
     }
     stage('Puppet Agent Run') {
       steps {
-        sh "/opt/puppetlabs/puppet/bin/mco puppet runall 5 --environment ${env.BRANCH_NAME}"
+        sh "/opt/puppetlabs/puppet/bin/mco puppet runall 5"
       }
     }
   }
