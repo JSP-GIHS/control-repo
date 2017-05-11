@@ -19,19 +19,19 @@ class managedfirewall {
   include firewall
 
   firewall { '0022 allow ssh':
-    port   => '22',
+    dport  => '22',
     proto  => 'tcp',
     action => 'accept',
   }
 
   firewall { '0161 allow snmp':
-    port   => '161',
+    dport  => '161',
     proto  => 'udp',
     action => 'accept',
   }
 
   firewall { '5666 allow nagios: nrpe':
-    port   => '5666',
+    dport  => '5666',
     proto  => 'tcp',
     action => 'accept',
   }
