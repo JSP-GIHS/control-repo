@@ -1,5 +1,5 @@
 # Xymon Client installation and configuration
-class profile::xymon::client {
+class profile::monitor::xymon::client {
 
   package { ['xymon-client']:
     ensure => 'latest',

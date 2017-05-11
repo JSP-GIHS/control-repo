@@ -10,7 +10,7 @@ class profile::base {
     }
     default: {
       include ntp
-      include profile::xymon::client
+      include profile::monitor::xymon::client
       include profile::snmp::linux
       include managedfirewall::pre
       include managedfirewall::post

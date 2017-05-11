@@ -2,7 +2,7 @@
 # be a little more generic.
 #
 # This profile requires nginx at this time.
-class profile::xymon::server {
+class profile::monitor::xymon::server {
 
   package { ['xymon']:
     ensure  => 'latest',
@@ -39,7 +39,7 @@ class profile::xymon::server {
 
   file { '/etc/xymon/hosts.cfg':
     ensure  => 'present',
-    source  => 'puppet:///modules/profile/xymon/hosts.cfg',
+    source  => 'puppet:///modules/profile/monitor/xymon/hosts.cfg',
     require => Package['xymon'],
     notify  => Service['xymon'],
   }
@@ -51,7 +51,7 @@ class profile::xymon::server {
 
   file { '/etc/nginx/sites-available/xymon':
     ensure  => 'present',
-    content => template('profile/xymon/nginx.cfg.erb'),
+    content => template('profile/monitor/xymon/nginx.cfg.erb'),
     notify  => Service['nginx'],
   }
 
