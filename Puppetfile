@@ -78,3 +78,5 @@ mod "camptocamp-openssl",                    :latest
 # MySQL
 #
 mod "puppetlabs-mysql",                      :latest
+mod "puppetlabs-staging",                    :latest
+#mod "puppetlabs-stdlib",                     :latest
