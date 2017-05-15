@@ -11,6 +11,7 @@ class librenms {
   include librenms::users
   include librenms::php
   include librenms::software
+  include librenms::snmp
 
   file { '/usr/bin/distro':
     ensure => 'present',
