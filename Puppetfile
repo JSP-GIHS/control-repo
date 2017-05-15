@@ -73,3 +73,8 @@ mod "puppetlabs-reboot",                     :latest
 #
 # DHParam Generation (Nginx Where needed)
 mod "camptocamp-openssl",                    :latest
+
+#
+# MySQL
+#
+mod "puppetlabs-mysql",                      :latest
