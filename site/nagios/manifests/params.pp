@@ -11,6 +11,9 @@ class nagios::params {
     'Ubuntu': {
       $service = 'nagios'
     }
+    'Windows': {
+      $service = 'ncsp'
+    }
     default: {
       fail("This module is not supported on ${::operatingsystem}")
     }
