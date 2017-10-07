@@ -16,7 +16,7 @@ pipeline {
   stages {
     stage('Puppet Parser Validation') {
       steps {
-        sh '/usr/bin/find . -path ./modules -prune -o -name "*.pp" -exec /opt/puppetlabs/puppet/bin/puppet parser validate {} \\;'
+        sh '/usr/bin/find . -path ./modules -prune -o -name "*.pp" -exec /opt/puppetlabs/puppet/bin/puppet parser validate {} \\+'
       }
     }
     stage('Puppet Lint Validation') {
