@@ -13,6 +13,7 @@ class profile::base {
       include profile::monitor::xymon::client
       include profile::snmp::linux
       include managedfirewall::pre
+      include managedfirewall
       include managedfirewall::post
       include firewall
     }
