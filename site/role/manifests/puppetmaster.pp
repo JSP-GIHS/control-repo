@@ -21,4 +21,10 @@ class role::puppetmaster {
   }
   include r10k::mcollective
 
+  firewall { '8140 allow puppet':
+    dport  => '8140',
+    proto  => 'tcp',
+    action => 'accept',
+  }
+
 }
