@@ -12,4 +12,16 @@ class role::puppetdb {
   include profile::nginx
   include profile::puppetboard::nginx
 
+  firewall { '8080 allow puppetdb':
+    dport  => '8080',
+    proto  => 'tcp',
+    action => 'accept',
+  }
+
+  firewall { '8081 allow puppetdb':
+    dport  => '8081',
+    proto  => 'tcp',
+    action => 'accept',
+  }
+
 }
